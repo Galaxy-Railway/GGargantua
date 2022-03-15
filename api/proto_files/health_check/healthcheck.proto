@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option go_package="api/protobuf/health";
+
+package go_post_engine.v1;
+
+message HealthCondition {
+  enum HealthStatus{
+    HEALTHY = 0;
+    UNHEALTHY = 1;
+  }
+  HealthStatus status = 1;
+  string reason = 2;
+}
+
+service HealthChecker {
+  rpc CheckHealth(google.protobuf.Empty) returns (HealthCondition);
+}

@@ -13,3 +13,10 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# Go tmp file
+go.sum
+
+# editor tmp file
+.idea
+.vscode

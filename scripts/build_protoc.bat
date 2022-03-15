@@ -1,0 +1,1 @@
+protoc -I. --go_out=. .\api\proto_files\health_check\healthcheck.proto
