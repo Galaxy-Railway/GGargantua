@@ -35,18 +35,3 @@ func InitLogger(config LogConfig) (err error) {
 func Logger() *zap.SugaredLogger {
 	return logger.Sugar()
 }
-
-func GetDefaultConfig() zap.Config {
-	return zap.Config{
-		Level:             zap.AtomicLevel{},
-		Development:       false,
-		DisableCaller:     false,
-		DisableStacktrace: false,
-		Sampling:          nil,
-		Encoding:          "",
-		EncoderConfig:     zapcore.EncoderConfig{},
-		OutputPaths:       nil,
-		ErrorOutputPaths:  nil,
-		InitialFields:     nil,
-	}
-}
