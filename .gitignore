@@ -20,3 +20,6 @@ go.sum
 # editor tmp file
 .idea
 .vscode
+
+# test files
+test.yaml

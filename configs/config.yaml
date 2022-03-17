@@ -1,0 +1,8 @@
+log:
+  env_type: "product"
+  output_path:
+    - "./log/gargantua.log"
+    - "stdout"
+listen:
+  address: ":8090"
+  network: "tcp"

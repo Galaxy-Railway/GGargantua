@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option go_package="api/protobuf/request_pb";
+
+package GGargantua.v1.request;
+
+message HttpRequest {
+  string Method = 1;
+  string Addr = 2;
+  string Port = 3;
+  string Url = 4;
+  map<string, string> Headers = 5;
+  map<string, string> Params = 6;
+  map<string, string> Queries = 7;
+  bytes Body = 8;
+}

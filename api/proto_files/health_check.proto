@@ -2,9 +2,9 @@ syntax = "proto3";
 
 import "google/protobuf/empty.proto";
 
-option go_package="api/protobuf/health_check";
+option go_package="api/protobuf/health_check_pb";
 
-package go_post_engine.v1;
+package GGargantua.v1;
 
 message HealthCondition {
   enum HealthStatus{
@@ -13,6 +13,7 @@ message HealthCondition {
   }
   HealthStatus status = 1;
   string reason = 2;
+  string error = 3;
 }
 
 service HealthChecker {

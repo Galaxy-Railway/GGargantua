@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option go_package="api/protobuf/request_pb";
+
+package GGargantua.v1.request;
+
+enum SchemaType{
+  HTTP = 0;
+  HTTPS = 1;
+}
+
+message SingleRequest {
+  SchemaType RequestSchema = 1;
+  bytes RequestContent = 2;
+}
+
+message SingleResponse {
+  SchemaType ResponseSchema = 1;
+  bytes ResponseContent = 2;
+}
+
+service SingleRequestSender {
+  rpc SendSingleRequest(SingleRequest) returns (SingleResponse);
+}
