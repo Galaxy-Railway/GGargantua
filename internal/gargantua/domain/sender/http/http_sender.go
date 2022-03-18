@@ -2,6 +2,7 @@ package http
 
 import (
 	"bytes"
+	"crypto/tls"
 	"encoding/json"
 	"github.com/pkg/errors"
 	"io/ioutil"
@@ -13,13 +14,21 @@ import (
 type HttpSender struct {
 }
 
-func (h *HttpSender) SendOnce(bytes []byte) ([]byte, error) {
+func (h *HttpSender) SendOnce(intput []byte) ([]byte, error) {
 	content := &HttpRequestContent{}
-	err := json.Unmarshal(bytes, content)
+	err := json.Unmarshal(intput, content)
 	if err != nil {
 		return nil, err
 	}
-	return nil, nil
+	resp, err := sendHttpRequest(content)
+	if err != nil {
+		return nil, err
+	}
+	output, err := json.Marshal(resp)
+	if err != nil {
+		return nil, err
+	}
+	return output, nil
 }
 
 func sendHttpRequest(httpRequest *HttpRequestContent) (*HttpResponseContent, error) {
@@ -33,6 +42,12 @@ func sendHttpRequest(httpRequest *HttpRequestContent) (*HttpResponseContent, err
 		firstByteTime time.Duration
 		completeTime  time.Duration
 	)
+
+	client = &http.Client{Transport: &http.Transport{
+		TLSClientConfig: &tls.Config{
+			InsecureSkipVerify: true,
+		},
+	}}
 
 	request, err = http.NewRequest(httpRequest.Method, httpRequest.Url, bytes.NewBuffer(httpRequest.Body))
 	if err != nil {

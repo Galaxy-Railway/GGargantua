@@ -6,7 +6,7 @@ import (
 )
 
 var (
-	once *sync.Once
+	once = &sync.Once{}
 
 	httpSender *http.HttpSender
 )

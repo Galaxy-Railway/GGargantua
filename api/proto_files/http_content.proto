@@ -8,13 +8,10 @@ import "google/protobuf/timestamp.proto";
 
 message HttpRequest {
   string Method = 1;
-  string Addr = 2;
-  string Port = 3;
-  string Url = 4;
-  map<string, string> Headers = 5;
-  map<string, string> Params = 6;
-  map<string, string> Queries = 7;
-  bytes Body = 8;
+  string Url = 2;
+  map<string, string> Headers = 3;
+  map<string, string> Params = 4;
+  bytes Body = 5;
 }
 
 message HttpResponse {

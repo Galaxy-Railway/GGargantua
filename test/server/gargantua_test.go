@@ -1,4 +1,4 @@
-package test
+package server
 
 import (
 	"github.com/Galaxy-Railway/GGargantua/cmd/gargantua/service"
@@ -6,5 +6,5 @@ import (
 )
 
 func TestGargantua(t *testing.T) {
-	service.Gargantua("../configs/config.yaml")
+	service.Gargantua("../test.yaml")
 }

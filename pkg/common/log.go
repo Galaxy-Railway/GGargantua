@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	once   = sync.Once{}
+	once   = &sync.Once{}
 	logger *zap.Logger
 )
 

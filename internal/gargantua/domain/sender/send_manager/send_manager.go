@@ -9,7 +9,7 @@ type SendManager struct {
 }
 
 var (
-	once = sync.Once{}
+	once = &sync.Once{}
 
 	sendManager *SendManager
 )
