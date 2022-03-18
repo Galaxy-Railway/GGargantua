@@ -4,6 +4,8 @@ option go_package="api/protobuf/request_pb";
 
 package GGargantua.v1.request;
 
+import "google/protobuf/timestamp.proto";
+
 message HttpRequest {
   string Method = 1;
   string Addr = 2;
@@ -13,4 +15,14 @@ message HttpRequest {
   map<string, string> Params = 6;
   map<string, string> Queries = 7;
   bytes Body = 8;
+}
+
+message HttpResponse {
+  string Body = 1;
+  map<string, string> Cookies = 2;
+  map<string, string> Headers = 3;
+  int32 Status = 4;
+  string StartTime = 5;
+  google.protobuf.Timestamp FistByteTime = 6;
+  google.protobuf.Timestamp CompleteTime = 7;
 }
