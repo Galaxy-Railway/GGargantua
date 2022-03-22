@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option go_package="api/protobuf/request_pb";
+
+package GGargantua.v1.request;
+
+message ListOfString{
+  repeated string Strings = 1;
+}
+

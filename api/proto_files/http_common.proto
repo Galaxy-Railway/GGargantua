@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option go_package="api/protobuf/request_pb";
+
+package GGargantua.v1.request;
+
+import "google/protobuf/timestamp.proto";
+
+message Cookie{
+  string Name = 1;
+  string Value = 2;
+  string Path = 3;
+  string Domain = 4;
+  google.protobuf.Timestamp Expires = 5;
+  string RawExpires = 6;
+  int32 MaxAge = 7;
+  bool Secure = 8;
+  bool HttpOnly = 9;
+  int32 SameSite = 10;
+  string Raw = 11;
+  repeated string Unparsed = 12;
+}
