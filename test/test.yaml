@@ -1,8 +1,0 @@
-log:
-  env_type: "develop"
-  output_path:
-    - "./log/gargantua.log"
-    - "stdout"
-listen:
-  address: ":8090"
-  network: "tcp"
