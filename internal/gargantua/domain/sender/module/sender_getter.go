@@ -8,12 +8,12 @@ import (
 var (
 	once = &sync.Once{}
 
-	httpSender *http.HttpSender
+	httpSender *http.Sender
 )
 
 func NewHttpSender() Sender {
 	once.Do(func() {
-		httpSender = &http.HttpSender{}
+		httpSender = &http.Sender{}
 	})
 	return httpSender
 }

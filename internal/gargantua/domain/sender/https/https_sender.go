@@ -11,12 +11,12 @@ import (
 	"time"
 )
 
-type HttpsSender struct {
+type Sender struct {
 }
 
-func (h *HttpsSender) SendOnce(intput []byte) ([]byte, error) {
-	content := &HttpsRequestContent{}
-	err := json.Unmarshal(intput, content)
+func (h *Sender) SendOnce(input []byte) ([]byte, error) {
+	content := &RequestContent{}
+	err := json.Unmarshal(input, content)
 	if err != nil {
 		return nil, err
 	}
@@ -31,7 +31,7 @@ func (h *HttpsSender) SendOnce(intput []byte) ([]byte, error) {
 	return output, nil
 }
 
-func sendHttpsRequest(httpsRequest *HttpsRequestContent) (*HttpsResponseContent, error) {
+func sendHttpsRequest(httpsRequest *RequestContent) (*ResponseContent, error) {
 	var (
 		client        *http.Client
 		request       *http.Request
@@ -79,7 +79,7 @@ func sendHttpsRequest(httpsRequest *HttpsRequestContent) (*HttpsResponseContent,
 	defer resp.Body.Close()
 	defer client.CloseIdleConnections()
 
-	httpsResponse := &HttpsResponseContent{
+	httpsResponse := &ResponseContent{
 		Body:         body,
 		Cookies:      resp.Cookies(),
 		Headers:      resp.Header,

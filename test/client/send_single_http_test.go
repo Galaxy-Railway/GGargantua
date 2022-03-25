@@ -9,7 +9,7 @@ import (
 )
 
 func TestSendSingleHttp(t *testing.T) {
-	httpRequest := new(http.HttpRequestContent)
+	httpRequest := new(http.RequestContent)
 	httpRequest.Url = "http://www.baidu.com"
 	httpRequest.Method = "GET"
 	bytes, err := json.Marshal(httpRequest)

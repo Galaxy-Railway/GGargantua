@@ -1,6 +1,6 @@
 package https
 
-type HttpsRequestContent struct {
+type RequestContent struct {
 	Method             string            `json:"Method,omitempty"`
 	Url                string            `json:"Url,omitempty"`
 	Headers            map[string]string `json:"Headers,omitempty"`

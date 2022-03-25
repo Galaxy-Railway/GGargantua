@@ -19,7 +19,7 @@ func NewSingleRequestSenderImpl(logger *zap.SugaredLogger) request_pb.SingleRequ
 	}
 }
 
-func (s SingleRequestSenderImpl) SendSingleRequest(ctx context.Context, request *request_pb.SingleRequest) (*request_pb.SingleResponse, error) {
+func (s SingleRequestSenderImpl) SendSingleRequest(_ context.Context, request *request_pb.SingleRequest) (*request_pb.SingleResponse, error) {
 	req := TransportSingleRequest(request)
 	res, err := single_request.SendSingleRequest(req)
 	if err != nil {

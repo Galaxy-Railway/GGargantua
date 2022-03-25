@@ -33,6 +33,7 @@ func GetConfig(configPath string) (*ProjectConfig, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer f.Close()
 	bytes, err := ioutil.ReadAll(f)
 	if err != nil {
 		return nil, err

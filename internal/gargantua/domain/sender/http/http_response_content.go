@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-type HttpResponseContent struct {
+type ResponseContent struct {
 	Body         []byte
 	Cookies      []*http.Cookie
 	Headers      map[string][]string

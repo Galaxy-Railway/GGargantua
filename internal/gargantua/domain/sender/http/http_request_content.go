@@ -1,6 +1,6 @@
 package http
 
-type HttpRequestContent struct {
+type RequestContent struct {
 	Method  string
 	Url     string
 	Headers map[string]string
