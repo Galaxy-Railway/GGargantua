@@ -22,5 +22,5 @@ go.sum
 .vscode
 
 # test files
-test.yaml
-wtf_test.yaml
+*test.yaml
+*wtf_test.yaml
