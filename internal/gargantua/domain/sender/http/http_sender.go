@@ -12,15 +12,26 @@ import (
 )
 
 type Sender struct {
+	HttpClient *http.Client
 }
 
-func (h *Sender) SendOnce(input []byte) ([]byte, error) {
+func (s *Sender) Init() {
+	// todo: set max conn, timeout, etc.
+	s.HttpClient = &http.Client{Transport: &http.Transport{
+		TLSClientConfig: &tls.Config{
+			InsecureSkipVerify: true,
+		},
+	}}
+}
+
+// SendOnce will send a message for once
+func (s *Sender) SendOnce(input []byte) ([]byte, error) {
 	content := &RequestContent{}
 	err := json.Unmarshal(input, content)
 	if err != nil {
 		return nil, err
 	}
-	resp, err := sendHttpRequest(content)
+	resp, err := s.sendHttpRequest(content)
 	if err != nil {
 		return nil, err
 	}
@@ -31,7 +42,8 @@ func (h *Sender) SendOnce(input []byte) ([]byte, error) {
 	return output, nil
 }
 
-func sendHttpRequest(httpRequest *RequestContent) (*ResponseContent, error) {
+// sendHttpRequest is the core part to send a request with http schema
+func (s *Sender) sendHttpRequest(httpRequest *RequestContent) (*ResponseContent, error) {
 	var (
 		client        *http.Client
 		request       *http.Request
@@ -43,11 +55,7 @@ func sendHttpRequest(httpRequest *RequestContent) (*ResponseContent, error) {
 		completeTime  time.Duration
 	)
 
-	client = &http.Client{Transport: &http.Transport{
-		TLSClientConfig: &tls.Config{
-			InsecureSkipVerify: true,
-		},
-	}}
+	client = s.HttpClient
 
 	request, err = http.NewRequest(httpRequest.Method, httpRequest.Url, bytes.NewBuffer(httpRequest.Body))
 	if err != nil {

@@ -11,7 +11,7 @@ var (
 	httpSender *http.Sender
 )
 
-func NewHttpSender() Sender {
+func NewHttpSender() ISender {
 	once.Do(func() {
 		httpSender = &http.Sender{}
 	})

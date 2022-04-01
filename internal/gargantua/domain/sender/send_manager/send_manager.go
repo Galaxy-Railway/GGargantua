@@ -22,7 +22,7 @@ func NewSendManager() *SendManager {
 }
 
 func (s *SendManager) SendSingleRequest(request *module.Request) (*module.Response, error) {
-	var sender module.Sender
+	var sender module.ISender
 	switch request.RequestSchema {
 	case module.HTTP:
 		sender = module.NewHttpSender()

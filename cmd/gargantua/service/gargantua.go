@@ -13,6 +13,7 @@ var (
 	logger *zap.SugaredLogger
 )
 
+// Gargantua is main server starter of gargantua
 func Gargantua(configFile string) {
 	config, err := common.GetConfig(configFile)
 	if err != nil {
@@ -34,6 +35,7 @@ func Gargantua(configFile string) {
 	}
 }
 
+// GargantuaGrpcServer will start a grpc server of gargantua
 func GargantuaGrpcServer(logger *zap.SugaredLogger) *grpc.Server {
 	server := grpc.NewServer()
 	ui.RegisterAllGrpc(server, logger)

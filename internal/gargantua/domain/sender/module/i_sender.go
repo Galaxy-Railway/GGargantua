@@ -1,5 +1,5 @@
 package module
 
-type Sender interface {
+type ISender interface {
 	SendOnce(request []byte) ([]byte, error)
 }

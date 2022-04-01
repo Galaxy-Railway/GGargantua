@@ -7,6 +7,8 @@ import (
 	"github.com/pkg/errors"
 )
 
+// SendSingleRequest will just send a single request,
+// without any other step.
 func SendSingleRequest(sRequest *module.SingleRequest) (*module.SingleResponse, error) {
 	sendManager := send_manager.NewSendManager()
 	req := &domainModule.Request{
