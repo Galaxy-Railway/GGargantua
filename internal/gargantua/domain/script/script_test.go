@@ -7,14 +7,6 @@ import (
 
 func TestScript(t *testing.T) {
 	v := vm.NewVM()
-	err := v.SetCacheGetter()
-	if err != nil {
-		t.Fatalf("err should be nil, got: %v", err)
-	}
-	err = v.SetCacheSetter()
-	if err != nil {
-		t.Fatalf("err should be nil, got: %v", err)
-	}
 
 	type JsTestStruct struct {
 		Id     int           `json:"id"`

@@ -2,6 +2,7 @@ package vm
 
 import (
 	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/script/cache"
+	"github.com/Galaxy-Railway/GGargantua/pkg/common"
 	"github.com/robertkrimen/otto"
 )
 
@@ -12,11 +13,20 @@ type VM struct {
 }
 
 func NewVM() *VM {
-	return &VM{
+	vm := &VM{
 		Ot:    otto.New(),
 		Cache: cache.NewCache(),
 		JobId: "",
 	}
+	err := vm.SetCacheSetter()
+	if err != nil {
+		common.Logger().Errorf("failed to set cacheSet() into vm, err: %v", err)
+	}
+	err = vm.SetCacheGetter()
+	if err != nil {
+		common.Logger().Errorf("failed to set cacheGet() into vm, err: %v", err)
+	}
+	return vm
 }
 
 func (v *VM) CleanVM() {
