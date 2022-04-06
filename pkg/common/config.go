@@ -26,9 +26,15 @@ type EnvType string
 var (
 	ProductEnv EnvType = "product"
 	DevelopEnv EnvType = "develop"
+
+	configPath = "./config.yaml"
 )
 
-func GetConfig(configPath string) (*ProjectConfig, error) {
+func SetConfigPath(path string) {
+	configPath = path
+}
+
+func NewConfig() (*ProjectConfig, error) {
 	f, err := os.Open(configPath)
 	if err != nil {
 		return nil, err

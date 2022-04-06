@@ -1,7 +1,7 @@
 package module
 
 import (
-	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/sender/http"
+	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/http"
 	"sync"
 )
 

@@ -2,7 +2,7 @@ package vm
 
 import (
 	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/script/cache"
-	"github.com/Galaxy-Railway/GGargantua/pkg/common"
+	"github.com/pkg/errors"
 	"github.com/robertkrimen/otto"
 )
 
@@ -12,7 +12,7 @@ type VM struct {
 	JobId string
 }
 
-func NewVM() *VM {
+func NewVM() (*VM, error) {
 	vm := &VM{
 		Ot:    otto.New(),
 		Cache: cache.NewCache(),
@@ -20,13 +20,13 @@ func NewVM() *VM {
 	}
 	err := vm.SetCacheSetter()
 	if err != nil {
-		common.Logger().Errorf("failed to set cacheSet() into vm, err: %v", err)
+		return nil, errors.Wrap(err, "failed to set cacheSet() into vm")
 	}
 	err = vm.SetCacheGetter()
 	if err != nil {
-		common.Logger().Errorf("failed to set cacheGet() into vm, err: %v", err)
+		return nil, errors.Wrap(err, "failed to set cacheGet() into vm")
 	}
-	return vm
+	return vm, nil
 }
 
 func (v *VM) CleanVM() {
@@ -37,8 +37,16 @@ func (v *VM) SetResponse(response interface{}) error {
 	return v.Ot.Set("response", response)
 }
 
-func (v *VM) RunScript(script string) (otto.Value, error) {
-	return v.Ot.Run(script)
+func (v *VM) RunScript(script string) (string, error) {
+	val, err := v.Ot.Run(script)
+	if err != nil {
+		return "", errors.Wrapf(err, "failed to run script: %s", script)
+	}
+	result, err := val.ToString()
+	if err != nil {
+		return "", errors.Wrapf(err, "failed to run script: %s", script)
+	}
+	return result, nil
 }
 
 // SetCacheSetter will set a setCache() function in js vm.
