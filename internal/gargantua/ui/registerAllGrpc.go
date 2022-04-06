@@ -7,6 +7,6 @@ import (
 	"google.golang.org/grpc"
 )
 
-func RegisterAllGrpc(server *grpc.Server, logger *zap.SugaredLogger){
+func RegisterAllGrpc(server *grpc.Server, logger *zap.SugaredLogger) {
 	request_pb.RegisterSingleRequestSenderServer(server, single_request.NewSingleRequestSenderImpl(logger))
 }

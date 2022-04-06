@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/empty.proto";
 
-option go_package="api/protobuf/health_check_pb";
+option go_package = "api/protobuf/health_check_pb";
 
 package GGargantua.v1;
 

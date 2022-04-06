@@ -17,7 +17,7 @@ func main() {
 	)
 	fs.Usage = usageFor(fs, os.Args[0]+" [flags]")
 	err := fs.Parse(os.Args[1:])
-	if err != nil{
+	if err != nil {
 		fmt.Printf("parse input params failed! error: %v", err)
 	}
 	service.Gargantua(*configFile)

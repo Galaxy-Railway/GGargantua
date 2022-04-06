@@ -9,4 +9,3 @@ const (
 	HTTP SchemaType = iota
 	HTTPS
 )
-
