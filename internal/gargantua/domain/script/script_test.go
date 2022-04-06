@@ -7,7 +7,7 @@ import (
 
 func TestScript(t *testing.T) {
 	v := vm.NewVM()
-
+	var err error
 	type JsTestStruct struct {
 		Id     int           `json:"id"`
 		Name   string        `json:"name"`
