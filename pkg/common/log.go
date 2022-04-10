@@ -7,10 +7,10 @@ import (
 )
 
 var (
-	GlobalLogger *zap.Logger
+	GlobalLogger *zap.SugaredLogger
 )
 
-func NewLogger(pConfig *ProjectConfig) (logger *zap.Logger, err error) {
+func NewLogger(pConfig *ProjectConfig) *zap.SugaredLogger {
 	config := pConfig.Log
 	var encoderCfg zapcore.EncoderConfig
 	if config.EnvType == ProductEnv {
@@ -20,17 +20,16 @@ func NewLogger(pConfig *ProjectConfig) (logger *zap.Logger, err error) {
 	}
 	encoderCfg.EncodeTime = zapcore.TimeEncoderOfLayout("2006-01-02 15:04:05.00")
 	atom := zap.NewAtomicLevel()
-	logger = zap.New(zapcore.NewCore(
+	logger := zap.New(zapcore.NewCore(
 		zapcore.NewJSONEncoder(encoderCfg),
 		zapcore.Lock(os.Stdout),
 		atom,
 	))
 	logger.WithOptions()
-	GlobalLogger = logger
-	return
+	GlobalLogger = logger.Sugar()
+	return GlobalLogger
 }
 
-//deprecated: this function should be delete, all logger should get by inject
-func Logger() *zap.SugaredLogger {
-	return GlobalLogger.Sugar()
+func LoggerInjectTrigger(_ *zap.SugaredLogger) {
+	return
 }

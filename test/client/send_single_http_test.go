@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/Galaxy-Railway/GGargantua/api/protobuf/request_pb"
-	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/sender/http"
+	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/http"
 	"testing"
 )
 

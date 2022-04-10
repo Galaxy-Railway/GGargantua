@@ -8,7 +8,8 @@ import (
 type TypeOfStep int
 
 const (
-	RequestStep = iota
+	Unknown = iota
+	RequestStep
 	ScriptStep
 	ForStep
 	IfStep

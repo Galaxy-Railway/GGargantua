@@ -11,7 +11,7 @@ func TranferSteps(steps *step_pb.MultiSteps) []*module.Step {
 	for i, s := range steps.GetSteps() {
 		result[i] = &module.Step{
 			Type:     module.TypeOfStep(int(s.TypeOfStep)),
-			Content:  s.Content,
+			Content:  []byte(s.Content),
 			Executor: nil,
 		}
 	}

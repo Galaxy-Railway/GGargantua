@@ -2,8 +2,8 @@ package module
 
 import (
 	"encoding/json"
+	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/multiple_steps"
 	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/module"
-	"github.com/Galaxy-Railway/GGargantua/pkg/common"
 	"time"
 )
 
@@ -17,10 +17,10 @@ type RequestStepExecutor struct {
 
 func (r *RequestStepExecutor) Execute() (*StepResult, error) {
 	for count := 0; count < r.Times; count++ {
-		common.Logger().Debugf("request %d/%d times", count, r.Times)
+		multiple_steps.Logger().Debugf("request %d/%d times", count, r.Times)
 		// todo: send multiple request
 	}
-	return nil, nil
+	return &StepResult{Result: []byte{}}, nil
 }
 
 func BuildRequestStepExecutor(str string) (*RequestStepExecutor, error) {

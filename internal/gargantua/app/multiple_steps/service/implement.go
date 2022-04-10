@@ -8,8 +8,8 @@ import (
 )
 
 type MultipleStepsImpl struct {
-	logger         *zap.Logger
-	requestService *request.RequestService
+	logger         *zap.SugaredLogger
+	requestService request.RequestService
 }
 
 func (m *MultipleStepsImpl) ExecuteSteps(steps []*module.Step) ([]*module.StepResult, error) {
@@ -25,7 +25,7 @@ func (m *MultipleStepsImpl) ExecuteSteps(steps []*module.Step) ([]*module.StepRe
 	return result, nil
 }
 
-func NewMultipleSteps(logger *zap.Logger, rs *request.RequestService) MultipleSteps {
+func NewMultipleSteps(logger *zap.SugaredLogger, rs request.RequestService) MultipleSteps {
 	return &MultipleStepsImpl{
 		logger:         logger,
 		requestService: rs,

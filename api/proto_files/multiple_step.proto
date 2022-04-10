@@ -5,15 +5,16 @@ option go_package = "api/protobuf/step_pb";
 package GGargantua.v1.request;
 
 enum StepType{
-  REQUEST = 0;
-  SCRIPT = 1;
-  FOR = 2;
-  IF = 3;
+  UNKNOWN = 0;
+  REQUEST = 1;
+  SCRIPT = 2;
+  FOR = 3;
+  IF = 4;
 }
 
 message Step {
   StepType TypeOfStep = 1;
-  bytes Content = 2;
+  string Content = 2;
 }
 
 message MultiSteps{
