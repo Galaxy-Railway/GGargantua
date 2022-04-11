@@ -1,7 +1,8 @@
 package module
 
 import (
-	"encoding/json"
+	request "github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/service"
+	script "github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/script/service"
 	"github.com/pkg/errors"
 )
 
@@ -25,14 +26,14 @@ var (
 	UnknownStepTypeError = errors.New("unknown step type")
 )
 
-func (s *Step) MarshalAndExecute() (*StepResult, error) {
+func (s *Step) MarshalAndExecute(rs request.RequestService, ss script.ScriptService) (*StepResult, error) {
 	switch s.Type {
 	case RequestStep:
-		tmp := &RequestStepExecutor{}
-		if err := json.Unmarshal(s.Content, tmp); err != nil {
+		exec, err := BuildRequestStepExecutor(s.Content, rs)
+		if err != nil {
 			return nil, errors.Wrapf(err, "failed to marshal step, content: %s", string(s.Content))
 		}
-		s.Executor = tmp
+		s.Executor = exec
 	default:
 		return nil, errors.Wrapf(UnknownStepTypeError, "got step type which is not supported: %s", s.Type)
 	}
