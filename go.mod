@@ -3,6 +3,7 @@ module github.com/Galaxy-Railway/GGargantua
 go 1.15
 
 require (
+	github.com/google/uuid v1.1.2
 	github.com/pkg/errors v0.8.1
 	github.com/robertkrimen/otto v0.0.0-20211024170158-b87d35c0b86f
 	go.uber.org/dig v1.14.1

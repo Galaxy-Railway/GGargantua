@@ -1,7 +1,10 @@
 package service
 
-import "github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/multiple_steps/module"
+import (
+	"context"
+	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/multiple_steps/module"
+)
 
-type MultipleSteps interface {
-	ExecuteSteps([]*module.Step) ([]*module.StepResult, error)
+type MultipleStepService interface {
+	ExecuteSteps([]*module.Step, context.Context) ([]*module.StepResult, error)
 }

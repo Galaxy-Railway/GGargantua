@@ -1,6 +1,7 @@
 package module
 
 import (
+	"context"
 	request "github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/service"
 	script "github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/script/service"
 	"github.com/pkg/errors"
@@ -26,16 +27,20 @@ var (
 	UnknownStepTypeError = errors.New("unknown step type")
 )
 
-func (s *Step) MarshalAndExecute(rs request.RequestService, ss script.ScriptService) (*StepResult, error) {
+func (s *Step) Marshal(rs request.RequestService, ss script.ScriptService) error {
 	switch s.Type {
 	case RequestStep:
 		exec, err := BuildRequestStepExecutor(s.Content, rs)
 		if err != nil {
-			return nil, errors.Wrapf(err, "failed to marshal step, content: %s", string(s.Content))
+			return errors.Wrapf(err, "failed to marshal step, content: %s", string(s.Content))
 		}
 		s.Executor = exec
 	default:
-		return nil, errors.Wrapf(UnknownStepTypeError, "got step type which is not supported: %s", s.Type)
+		return errors.Wrapf(UnknownStepTypeError, "got step type which is not supported: %s", s.Type)
 	}
-	return s.Executor.Execute()
+	return nil
+}
+
+func (s *Step) Execute(ctx context.Context) (*StepResult, error) {
+	return s.Executor.Execute(ctx)
 }

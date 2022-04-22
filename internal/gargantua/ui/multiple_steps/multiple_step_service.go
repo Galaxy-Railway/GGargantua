@@ -8,16 +8,16 @@ import (
 )
 
 type MultipleStepService struct {
-	Multi service.MultipleSteps
+	Multi service.MultipleStepService
 }
 
-func NewMultipleStepService(s service.MultipleSteps) step_pb.MultipleStepServiceServer {
+func NewMultipleStepService(s service.MultipleStepService) step_pb.MultipleStepServiceServer {
 	return &MultipleStepService{Multi: s}
 }
 
 func (m *MultipleStepService) ExecuteMultipleStep(ctx context.Context, steps *step_pb.MultiSteps) (*step_pb.MultiResults, error) {
 	appSteps := TranferSteps(steps)
-	appResult, err := m.Multi.ExecuteSteps(appSteps)
+	appResult, err := m.Multi.ExecuteSteps(appSteps, ctx)
 	if err != nil {
 		multiple_steps.Logger().Errorf("failed to ExecuteMultipleStep, err: %v", err)
 		return nil, err

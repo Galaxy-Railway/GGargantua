@@ -1,5 +1,7 @@
 package module
 
+import "context"
+
 type StepExecutor interface {
-	Execute() (*StepResult, error)
+	Execute(ctx context.Context) (*StepResult, error)
 }
