@@ -5,7 +5,7 @@ import (
 	multiStep "github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/multiple_steps/module"
 )
 
-type JobService interface {
+type JobServiceApp interface {
 	CreateJob() *module.Job
 	StartAJob(uuid string, steps []*multiStep.Step) (*module.Job, error)
 	CancelAJob(uuid string) (*module.Job, error)

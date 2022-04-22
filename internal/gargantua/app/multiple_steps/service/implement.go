@@ -10,13 +10,13 @@ import (
 	"go.uber.org/zap"
 )
 
-type MultipleStepServiceImpl struct {
+type MultipleStepServiceAppImpl struct {
 	logger         *zap.SugaredLogger
 	requestService request.RequestService
 	scriptService  script.ScriptService
 }
 
-func (m *MultipleStepServiceImpl) ExecuteSteps(steps []*module.Step, ctx context.Context) ([]*module.StepResult, error) {
+func (m *MultipleStepServiceAppImpl) ExecuteSteps(steps []*module.Step, ctx context.Context) ([]*module.StepResult, error) {
 	l := len(steps)
 	result := make([]*module.StepResult, l)
 	for i, s := range steps {
@@ -39,8 +39,8 @@ func (m *MultipleStepServiceImpl) ExecuteSteps(steps []*module.Step, ctx context
 	return result, nil
 }
 
-func NewMultipleStepsService(logger *zap.SugaredLogger, rs request.RequestService, ss script.ScriptService) MultipleStepService {
-	return &MultipleStepServiceImpl{
+func NewMultipleStepsServiceApp(logger *zap.SugaredLogger, rs request.RequestService, ss script.ScriptService) MultipleStepServiceApp {
+	return &MultipleStepServiceAppImpl{
 		logger:         logger,
 		requestService: rs,
 		scriptService:  ss,

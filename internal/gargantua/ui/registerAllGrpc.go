@@ -13,8 +13,8 @@ import (
 func RegisterAllGrpc(
 	server *grpc.Server,
 	logger *zap.SugaredLogger,
-	multiApp service.MultipleStepService,
-	jobApp jobService.JobService) {
-	step_pb.RegisterMultipleStepServiceServer(server, multiple_steps.NewMultipleStepService(multiApp))
+	multiApp service.MultipleStepServiceApp,
+	jobApp jobService.JobServiceApp) {
+	step_pb.RegisterMultipleStepServiceServer(server, multiple_steps.NewMultipleStepServiceUI(multiApp))
 	step_pb.RegisterJobServiceServer(server, job.NewJobServiceUI(jobApp, logger))
 }

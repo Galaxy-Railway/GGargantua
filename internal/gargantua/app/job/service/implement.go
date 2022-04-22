@@ -10,9 +10,9 @@ import (
 	"time"
 )
 
-type JobServiceImpl struct {
+type JobServiceAppImpl struct {
 	Jobs             map[string]*module.Job
-	MultiStepService stepService.MultipleStepService
+	MultiStepService stepService.MultipleStepServiceApp
 }
 
 var (
@@ -22,18 +22,18 @@ var (
 	StepsNotSetError = errors.New("steps have not set to this job")
 )
 
-func NewJobService(mss stepService.MultipleStepService) JobService {
-	return &JobServiceImpl{
+func NewJobServiceApp(mss stepService.MultipleStepServiceApp) JobServiceApp {
+	return &JobServiceAppImpl{
 		Jobs:             make(map[string]*module.Job),
 		MultiStepService: mss,
 	}
 }
 
-func (j JobServiceImpl) CreateJob() *module.Job {
+func (j JobServiceAppImpl) CreateJob() *module.Job {
 	return module.NewJob()
 }
 
-func (j JobServiceImpl) StartAJob(uu string, steps []*stepModule.Step) (*module.Job, error) {
+func (j JobServiceAppImpl) StartAJob(uu string, steps []*stepModule.Step) (*module.Job, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	job, ok := j.Jobs[uu]
 	if !ok {
@@ -50,7 +50,7 @@ func (j JobServiceImpl) StartAJob(uu string, steps []*stepModule.Step) (*module.
 	return job, nil
 }
 
-func (j JobServiceImpl) CancelAJob(uu string) (*module.Job, error) {
+func (j JobServiceAppImpl) CancelAJob(uu string) (*module.Job, error) {
 	job, ok := j.Jobs[uu]
 	if !ok {
 		return nil, JobNotFoundError
@@ -59,7 +59,7 @@ func (j JobServiceImpl) CancelAJob(uu string) (*module.Job, error) {
 	return job, nil
 }
 
-func (j JobServiceImpl) GetJobResult(uu string) ([]*stepModule.StepResult, error) {
+func (j JobServiceAppImpl) GetJobResult(uu string) ([]*stepModule.StepResult, error) {
 	job, ok := j.Jobs[uu]
 	if !ok {
 		return nil, JobNotFoundError

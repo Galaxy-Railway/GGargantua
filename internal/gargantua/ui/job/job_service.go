@@ -9,11 +9,11 @@ import (
 )
 
 type JobServiceUI struct {
-	JobServiceApp jobService.JobService
+	JobServiceApp jobService.JobServiceApp
 	logger        *zap.SugaredLogger
 }
 
-func NewJobServiceUI(jobServiceApp jobService.JobService, logger *zap.SugaredLogger) step_pb.JobServiceServer {
+func NewJobServiceUI(jobServiceApp jobService.JobServiceApp, logger *zap.SugaredLogger) step_pb.JobServiceServer {
 	return &JobServiceUI{JobServiceApp: jobServiceApp, logger: logger.Named("JobServiceUI")}
 }
 

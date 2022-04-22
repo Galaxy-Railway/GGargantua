@@ -7,15 +7,15 @@ import (
 	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/multiple_steps/service"
 )
 
-type MultipleStepService struct {
-	Multi service.MultipleStepService
+type MultipleStepServiceUI struct {
+	Multi service.MultipleStepServiceApp
 }
 
-func NewMultipleStepService(s service.MultipleStepService) step_pb.MultipleStepServiceServer {
-	return &MultipleStepService{Multi: s}
+func NewMultipleStepServiceUI(s service.MultipleStepServiceApp) step_pb.MultipleStepServiceServer {
+	return &MultipleStepServiceUI{Multi: s}
 }
 
-func (m *MultipleStepService) ExecuteMultipleStep(ctx context.Context, steps *step_pb.MultiSteps) (*step_pb.MultiResults, error) {
+func (m *MultipleStepServiceUI) ExecuteMultipleStep(ctx context.Context, steps *step_pb.MultiSteps) (*step_pb.MultiResults, error) {
 	appSteps := TranferSteps(steps)
 	appResult, err := m.Multi.ExecuteSteps(appSteps, ctx)
 	if err != nil {

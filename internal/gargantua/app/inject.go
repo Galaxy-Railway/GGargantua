@@ -26,12 +26,12 @@ func InjectLoggers(container *dig.Container) error {
 }
 
 func InjectService(container *dig.Container) error {
-	if err := container.Provide(multiStepService.NewMultipleStepsService); err != nil {
-		return errors.Wrap(err, "failed to provide NewMultipleSteps()")
+	if err := container.Provide(multiStepService.NewMultipleStepsServiceApp); err != nil {
+		return errors.Wrap(err, "failed to provide NewMultipleStepsServiceApp()")
 	}
 
-	if err := container.Provide(jobService.NewJobService); err != nil {
-		return errors.Wrap(err, "failed to provide NewJobService()")
+	if err := container.Provide(jobService.NewJobServiceApp); err != nil {
+		return errors.Wrap(err, "failed to provide NewJobServiceApp()")
 	}
 	return nil
 }

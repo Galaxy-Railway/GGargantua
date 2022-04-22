@@ -34,7 +34,7 @@ func NewJob() *Job {
 	}
 }
 
-func (j *Job) GoJob(ctx context.Context, msService service.MultipleStepService) {
+func (j *Job) GoJob(ctx context.Context, msService service.MultipleStepServiceApp) {
 	go func() {
 		j.Status = PROCESSING
 		result, err := msService.ExecuteSteps(j.MultiSteps.Steps, ctx)

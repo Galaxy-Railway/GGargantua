@@ -5,6 +5,6 @@ import (
 	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/multiple_steps/module"
 )
 
-type MultipleStepService interface {
+type MultipleStepServiceApp interface {
 	ExecuteSteps([]*module.Step, context.Context) ([]*module.StepResult, error)
 }
