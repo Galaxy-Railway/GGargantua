@@ -1,4 +1,4 @@
-package job
+package transport
 
 import (
 	"github.com/Galaxy-Railway/GGargantua/api/protobuf/step_pb"
