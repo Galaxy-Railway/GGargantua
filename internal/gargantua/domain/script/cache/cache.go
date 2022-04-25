@@ -6,12 +6,12 @@ import (
 )
 
 type Cache struct {
-	CMap map[string]*CacheValue
+	CMap map[string]*Value
 }
 
 func NewCache() Cache {
 	return Cache{
-		CMap: make(map[string]*CacheValue),
+		CMap: make(map[string]*Value),
 	}
 }
 
@@ -20,7 +20,7 @@ func (c *Cache) Set(keyOfCache, typeOfCache string, value string) error {
 	if err != nil {
 		return err
 	}
-	cv := CacheValue{
+	cv := Value{
 		TypeOfCache: t,
 	}
 	switch t {
@@ -71,29 +71,29 @@ func (c *Cache) Get(keyOfCache string) interface{} {
 	return nil
 }
 
-type CacheValue struct {
-	TypeOfCache CacheType
+type Value struct {
+	TypeOfCache Type
 	Value       interface{}
 }
 
-type CacheType int
+type Type int
 
 const (
-	BoolCacheType CacheType = iota
+	BoolCacheType Type = iota
 	StringCacheType
 	IntCacheType
 	Int64CacheType
 	FloatCacheType
 	Float64CacheType
 
-	UnknownCacheType CacheType = -1
+	UnknownCacheType Type = -1
 )
 
 var (
 	UnknownCacheTypeError = errors.New("type of this cache is not supported, yet. Please choose one type of (bool, string, int, int64, float, float64)")
 )
 
-func StringToCacheType(str string) (CacheType, error) {
+func StringToCacheType(str string) (Type, error) {
 	switch str {
 	case "bool":
 		return BoolCacheType, nil
