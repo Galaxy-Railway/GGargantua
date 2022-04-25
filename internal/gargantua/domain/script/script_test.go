@@ -6,8 +6,11 @@ import (
 )
 
 func TestScript(t *testing.T) {
-	v := vm.NewVM()
 	var err error
+	v, err := vm.NewVM()
+	if err != nil {
+		t.Fatalf("failed to get vm, err: %v", err)
+	}
 	type JsTestStruct struct {
 		Id     int           `json:"id"`
 		Name   string        `json:"name"`

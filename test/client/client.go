@@ -7,7 +7,7 @@ import (
 )
 
 func GetConnection() (*grpc.ClientConn, error) {
-	config, err := common.NewConfig("../test.yaml")
+	config, err := common.NewConfig()
 	if err != nil {
 		return nil, err
 	}
