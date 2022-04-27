@@ -5,7 +5,7 @@ import "go.uber.org/zap"
 var logger *zap.SugaredLogger
 
 func InjectLogger(globalLogger *zap.SugaredLogger) {
-	logger = globalLogger.Named("app | multiple_step")
+	logger = globalLogger.Named("app | step")
 }
 
 func Logger() *zap.SugaredLogger {

@@ -8,18 +8,18 @@ import (
 	"go.uber.org/zap"
 )
 
-type MultipleStepServiceAppImpl struct {
+type StepServiceAppImpl struct {
 	logger         *zap.SugaredLogger
 	requestService request.RequestService
 	scriptService  script.ScriptService
 }
 
-func (m *MultipleStepServiceAppImpl) ExecuteSteps(step *module.Step, ctx context.Context) (*module.StepResult, error) {
+func (m *StepServiceAppImpl) ExecuteSteps(step *module.Step, ctx context.Context) (*module.StepResult, error) {
 	return step.Execute(ctx)
 }
 
-func NewMultipleStepsServiceApp(logger *zap.SugaredLogger, rs request.RequestService, ss script.ScriptService) StepServiceApp {
-	return &MultipleStepServiceAppImpl{
+func NewStepsServiceApp(logger *zap.SugaredLogger, rs request.RequestService, ss script.ScriptService) StepServiceApp {
+	return &StepServiceAppImpl{
 		logger:         logger,
 		requestService: rs,
 		scriptService:  ss,

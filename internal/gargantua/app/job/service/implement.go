@@ -11,8 +11,8 @@ import (
 )
 
 type JobServiceAppImpl struct {
-	Jobs             map[string]*module.Job
-	MultiStepService stepService.StepServiceApp
+	Jobs        map[string]*module.Job
+	StepService stepService.StepServiceApp
 }
 
 var (
@@ -24,8 +24,8 @@ var (
 
 func NewJobServiceApp(mss stepService.StepServiceApp) JobServiceApp {
 	return &JobServiceAppImpl{
-		Jobs:             make(map[string]*module.Job),
-		MultiStepService: mss,
+		Jobs:        make(map[string]*module.Job),
+		StepService: mss,
 	}
 }
 
@@ -52,7 +52,7 @@ func (j JobServiceAppImpl) StartAJob(uu string, step *stepModule.Step) (*module.
 	job.MainStep = step
 	job.CtxCancel = cancel
 	job.StartTime = time.Now()
-	job.GoJob(ctx, j.MultiStepService)
+	job.GoJob(ctx, j.StepService)
 	return job, nil
 }
 

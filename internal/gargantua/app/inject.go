@@ -3,7 +3,7 @@ package app
 import (
 	jobService "github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/job/service"
 	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/step"
-	multiStepService "github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/step/service"
+	stepService "github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/step/service"
 	"github.com/pkg/errors"
 	"go.uber.org/dig"
 )
@@ -26,8 +26,8 @@ func InjectLoggers(container *dig.Container) error {
 }
 
 func InjectService(container *dig.Container) error {
-	if err := container.Provide(multiStepService.NewMultipleStepsServiceApp); err != nil {
-		return errors.Wrap(err, "failed to provide NewMultipleStepsServiceApp()")
+	if err := container.Provide(stepService.NewStepsServiceApp); err != nil {
+		return errors.Wrap(err, "failed to provide NewStepsServiceApp()")
 	}
 
 	if err := container.Provide(jobService.NewJobServiceApp); err != nil {
