@@ -3,6 +3,8 @@ package module
 import (
 	"context"
 	"github.com/Galaxy-Railway/GGargantua/api/protobuf"
+	request "github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/service"
+	script "github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/script/service"
 	"github.com/pkg/errors"
 )
 
@@ -47,18 +49,18 @@ var (
 	UnknownStepTypeError = errors.New("unknown step type")
 )
 
-func (s *Step) Execute(ctx context.Context) (*StepResult, error) {
+func (s *Step) Execute(ctx context.Context, requestService request.RequestService, scriptService script.ScriptService) (*StepResult, error) {
 	switch s.Type {
 	case StepTypeRequest:
-		return s.RequestStep.Execute(ctx)
+		return s.RequestStep.Execute(ctx, requestService, scriptService)
 	case StepTypeScript:
-		return s.ScriptStep.Execute(ctx)
+		return s.ScriptStep.Execute(ctx, requestService, scriptService)
 	case StepTypeFor:
-		return s.ForStep.Execute(ctx)
+		return s.ForStep.Execute(ctx, requestService, scriptService)
 	case StepTypeIf:
-		return s.IfStep.Execute(ctx)
+		return s.IfStep.Execute(ctx, requestService, scriptService)
 	case StepTypeSequence:
-		return s.SequenceStep.Execute(ctx)
+		return s.SequenceStep.Execute(ctx, requestService, scriptService)
 	case StepTypeUnknown:
 		return nil, UnknownStepTypeError
 	default:

@@ -3,6 +3,8 @@ package module
 import (
 	"context"
 	"github.com/Galaxy-Railway/GGargantua/api/protobuf"
+	request "github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/service"
+	script "github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/script/service"
 )
 
 type IfStepType struct {
@@ -24,7 +26,7 @@ func TransIfStepTypeByPb(stepType *protobuf.IfStepType) *IfStepType {
 	}
 }
 
-func (f *IfStepType) Execute(ctx context.Context) (*StepResult, error) {
+func (f *IfStepType) Execute(ctx context.Context, requestService request.RequestService, scriptService script.ScriptService) (*StepResult, error) {
 	//TODO implement me
 	panic("implement me")
 }

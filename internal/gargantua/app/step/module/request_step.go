@@ -4,6 +4,8 @@ import (
 	"context"
 	"github.com/Galaxy-Railway/GGargantua/api/protobuf"
 	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/module"
+	request "github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/service"
+	script "github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/script/service"
 )
 
 type RequestStepType struct {
@@ -21,7 +23,7 @@ func TransRequestStepTypeByPb(stepType *protobuf.RequestStepType) *RequestStepTy
 	}
 }
 
-func (f *RequestStepType) Execute(ctx context.Context) (*StepResult, error) {
+func (f *RequestStepType) Execute(ctx context.Context, requestService request.RequestService, scriptService script.ScriptService) (*StepResult, error) {
 	//TODO implement me
 	panic("implement me")
 }
