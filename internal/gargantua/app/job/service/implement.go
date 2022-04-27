@@ -30,7 +30,9 @@ func NewJobServiceApp(mss stepService.StepServiceApp) JobServiceApp {
 }
 
 func (j JobServiceAppImpl) CreateJob() *module.Job {
-	return module.NewJob()
+	job := module.NewJob()
+	j.Jobs[job.Uuid] = job
+	return job
 }
 
 func (j JobServiceAppImpl) GetAJob(uu string) (*module.Job, error) {
