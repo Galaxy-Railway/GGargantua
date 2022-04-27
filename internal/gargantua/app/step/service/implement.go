@@ -15,7 +15,7 @@ type StepServiceAppImpl struct {
 }
 
 func (m *StepServiceAppImpl) ExecuteStep(step *module.Step, ctx context.Context) (*module.StepResult, error) {
-	return step.Execute(ctx)
+	return step.Execute(ctx, m.requestService, m.scriptService)
 }
 
 func NewStepsServiceApp(logger *zap.SugaredLogger, rs request.RequestService, ss script.ScriptService) StepServiceApp {
