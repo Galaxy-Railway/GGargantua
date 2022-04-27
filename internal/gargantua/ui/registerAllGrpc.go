@@ -1,11 +1,10 @@
 package ui
 
 import (
-	"github.com/Galaxy-Railway/GGargantua/api/protobuf/step_pb"
+	"github.com/Galaxy-Railway/GGargantua/api/protobuf"
 	jobService "github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/job/service"
-	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/multiple_steps/service"
+	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/step/service"
 	service2 "github.com/Galaxy-Railway/GGargantua/internal/gargantua/ui/job/service"
-	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/ui/multiple_steps"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 )
@@ -13,8 +12,7 @@ import (
 func RegisterAllGrpc(
 	server *grpc.Server,
 	logger *zap.SugaredLogger,
-	multiApp service.MultipleStepServiceApp,
+	multiApp service.StepServiceApp,
 	jobApp jobService.JobServiceApp) {
-	step_pb.RegisterMultipleStepServiceServer(server, multiple_steps.NewMultipleStepServiceUI(multiApp))
-	step_pb.RegisterJobServiceServer(server, service2.NewJobServiceUI(jobApp, logger))
+	protobuf.RegisterJobServiceServer(server, service2.NewJobServiceUI(jobApp, logger))
 }

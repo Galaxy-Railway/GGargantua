@@ -3,8 +3,8 @@ package module
 import (
 	"context"
 	"errors"
-	multiStep "github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/multiple_steps/module"
-	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/multiple_steps/service"
+	StepModule "github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/step/module"
+	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/step/service"
 	"github.com/Galaxy-Railway/GGargantua/pkg/common"
 	"github.com/google/uuid"
 	"time"
@@ -12,12 +12,12 @@ import (
 
 type Job struct {
 	Uuid   string
-	Status JobStatus
+	Status JobProgress
 	Reason string
 
 	CtxCancel context.CancelFunc
 
-	MultiSteps *multiStep.MultiSteps
+	MainStep *StepModule.Step
 
 	CreateTime time.Time
 	StartTime  time.Time
@@ -34,10 +34,10 @@ func NewJob() *Job {
 	}
 }
 
-func (j *Job) GoJob(ctx context.Context, msService service.MultipleStepServiceApp) {
+func (j *Job) GoJob(ctx context.Context, msService service.StepServiceApp) {
 	go func() {
 		j.Status = PROCESSING
-		result, err := msService.ExecuteSteps(j.MultiSteps.Steps, ctx)
+		result, err := msService.ExecuteSteps(j.MainStep, ctx)
 		if err != nil {
 			if errors.Is(err, common.CanceledError) {
 				j.Status = CANCELED
@@ -49,23 +49,24 @@ func (j *Job) GoJob(ctx context.Context, msService service.MultipleStepServiceAp
 		} else {
 			j.Status = FINISHED
 			j.Reason = "this job was finished"
-			j.MultiSteps.Results = result
+			j.MainStep.Result = result
 		}
 		j.EndTime = time.Now()
 	}()
 }
 
 func (j *Job) Cancel() {
-	j.Status = CANCELED
+	j.Status = CANCELING
 	j.CtxCancel()
+	j.Status = CANCELED
 	j.EndTime = time.Now()
 	j.Reason = "job canceled"
 }
 
-type JobStatus int
+type JobProgress int
 
 const (
-	CREATED JobStatus = iota
+	CREATED JobProgress = iota
 	PROCESSING
 	FINISHED
 	FAILED

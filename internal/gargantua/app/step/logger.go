@@ -1,4 +1,4 @@
-package multiple_steps
+package step
 
 import "go.uber.org/zap"
 

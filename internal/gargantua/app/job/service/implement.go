@@ -4,15 +4,15 @@ import (
 	"context"
 	"errors"
 	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/job/module"
-	stepModule "github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/multiple_steps/module"
-	stepService "github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/multiple_steps/service"
+	stepModule "github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/step/module"
+	stepService "github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/step/service"
 	"sync"
 	"time"
 )
 
 type JobServiceAppImpl struct {
 	Jobs             map[string]*module.Job
-	MultiStepService stepService.MultipleStepServiceApp
+	MultiStepService stepService.StepServiceApp
 }
 
 var (
@@ -22,7 +22,7 @@ var (
 	StepsNotSetError = errors.New("steps have not set to this job")
 )
 
-func NewJobServiceApp(mss stepService.MultipleStepServiceApp) JobServiceApp {
+func NewJobServiceApp(mss stepService.StepServiceApp) JobServiceApp {
 	return &JobServiceAppImpl{
 		Jobs:             make(map[string]*module.Job),
 		MultiStepService: mss,
@@ -33,17 +33,21 @@ func (j JobServiceAppImpl) CreateJob() *module.Job {
 	return module.NewJob()
 }
 
-func (j JobServiceAppImpl) StartAJob(uu string, steps []*stepModule.Step) (*module.Job, error) {
+func (j JobServiceAppImpl) GetAJob(uu string) (*module.Job, error) {
+	if job, ok := j.Jobs[uu]; ok {
+		return job, nil
+	}
+	return nil, JobNotFoundError
+}
+
+func (j JobServiceAppImpl) StartAJob(uu string, step *stepModule.Step) (*module.Job, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	job, ok := j.Jobs[uu]
 	if !ok {
 		cancel()
 		return nil, JobNotFoundError
 	}
-	job.MultiSteps = &stepModule.MultiSteps{
-		Steps:   steps,
-		Context: ctx,
-	}
+	job.MainStep = step
 	job.CtxCancel = cancel
 	job.StartTime = time.Now()
 	job.GoJob(ctx, j.MultiStepService)
@@ -59,13 +63,13 @@ func (j JobServiceAppImpl) CancelAJob(uu string) (*module.Job, error) {
 	return job, nil
 }
 
-func (j JobServiceAppImpl) GetJobResult(uu string) ([]*stepModule.StepResult, error) {
+func (j JobServiceAppImpl) GetJobResult(uu string) (*stepModule.StepResult, error) {
 	job, ok := j.Jobs[uu]
 	if !ok {
 		return nil, JobNotFoundError
 	}
-	if job.MultiSteps == nil {
+	if job.MainStep == nil {
 		return nil, StepsNotSetError
 	}
-	return job.MultiSteps.Results, nil
+	return job.MainStep.Result, nil
 }

@@ -2,8 +2,8 @@ package app
 
 import (
 	jobService "github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/job/service"
-	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/multiple_steps"
-	multiStepService "github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/multiple_steps/service"
+	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/step"
+	multiStepService "github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/step/service"
 	"github.com/pkg/errors"
 	"go.uber.org/dig"
 )
@@ -19,8 +19,8 @@ func InjectAppLayer(container *dig.Container) error {
 }
 
 func InjectLoggers(container *dig.Container) error {
-	if err := container.Invoke(multiple_steps.InjectLogger); err != nil {
-		return errors.Wrap(err, "failed to inject logger of multiple_steps")
+	if err := container.Invoke(step.InjectLogger); err != nil {
+		return errors.Wrap(err, "failed to inject logger of step")
 	}
 	return nil
 }

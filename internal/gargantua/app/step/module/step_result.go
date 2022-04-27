@@ -1,6 +1,6 @@
 package module
 
 type StepResult struct {
-	Result        []byte
+	Result        string
 	SubStepResult []*StepResult
 }

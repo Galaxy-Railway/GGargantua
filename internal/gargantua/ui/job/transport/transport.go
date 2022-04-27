@@ -1,67 +1,50 @@
 package transport
 
 import (
-	"github.com/Galaxy-Railway/GGargantua/api/protobuf/step_pb"
+	"github.com/Galaxy-Railway/GGargantua/api/protobuf"
 	module2 "github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/job/module"
-	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/multiple_steps/module"
+	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/step/module"
 )
 
-func TranferSteps(steps *step_pb.MultiSteps) []*module.Step {
-	l := len(steps.Steps)
-	result := make([]*module.Step, l)
-	for i, s := range steps.GetSteps() {
-		result[i] = &module.Step{
-			Type:     module.TypeOfStep(int(s.TypeOfStep)),
-			Content:  []byte(s.Content),
-			Executor: nil,
-		}
-	}
-	return result
+func TransStringToUuid(id string) *protobuf.JobUuid {
+	return &protobuf.JobUuid{Uuid: id}
 }
 
-func TransStringToUuid(id string) *step_pb.JobUuid {
-	return &step_pb.JobUuid{Uuid: id}
-}
-
-func TransUuidToString(id *step_pb.JobUuid) string {
+func TransUuidToString(id *protobuf.JobUuid) string {
 	return id.Uuid
 }
 
-func TransferStepResult(result *module.StepResult) *step_pb.StepResult {
-	return &step_pb.StepResult{
+func TransferStepResult(result *module.StepResult) *protobuf.StepResult {
+	return &protobuf.StepResult{
 		Result:    result.Result,
 		SubResult: TransferStepResultsSlice(result.SubStepResult),
 	}
 }
 
-func TransferStepResultsSlice(result []*module.StepResult) []*step_pb.StepResult {
+func TransferStepResultsSlice(result []*module.StepResult) []*protobuf.StepResult {
 	l := len(result)
-	pbResult := make([]*step_pb.StepResult, l)
+	pbResult := make([]*protobuf.StepResult, l)
 	for i, r := range result {
 		pbResult[i] = TransferStepResult(r)
 	}
 	return pbResult
 }
 
-func TransferMultiStepResults(result []*module.StepResult) *step_pb.MultiResults {
-	l := len(result)
-	pbResult := make([]*step_pb.StepResult, l)
-	for i, r := range result {
-		pbResult[i] = TransferStepResult(r)
-	}
-	return &step_pb.MultiResults{
-		Results: pbResult,
-	}
+func TransferUpdateJobContent(content *protobuf.UpdateJobContent) (string, *module.Step) {
+	return content.Uuid.Uuid, module.TransStepFromPB(content.MainStep)
 }
 
-func TransferUpdateJobContent(content *step_pb.UpdateJobContent) (string, []*module.Step) {
-	return content.Uuid.Uuid, TranferSteps(content.Steps)
-}
-
-func GetJobStatus(job *module2.Job) *step_pb.JobStatus {
-	return &step_pb.JobStatus{
+func GetJobStatus(job *module2.Job) *protobuf.JobStatus {
+	return &protobuf.JobStatus{
 		Uuid:     job.Uuid,
-		Progress: step_pb.JobProgress(int(job.Status)),
+		Progress: protobuf.JobProgress(int(job.Status)),
 		Reason:   job.Reason,
+	}
+}
+
+func GetJobResult(job *module2.Job) *protobuf.JobResult {
+	return &protobuf.JobResult{
+		Status: GetJobStatus(job),
+		Result: TransferStepResult(job.MainStep.Result),
 	}
 }
