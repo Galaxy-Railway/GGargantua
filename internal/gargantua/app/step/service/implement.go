@@ -14,7 +14,7 @@ type StepServiceAppImpl struct {
 	scriptService  script.ScriptService
 }
 
-func (m *StepServiceAppImpl) ExecuteSteps(step *module.Step, ctx context.Context) (*module.StepResult, error) {
+func (m *StepServiceAppImpl) ExecuteStep(step *module.Step, ctx context.Context) (*module.StepResult, error) {
 	return step.Execute(ctx)
 }
 

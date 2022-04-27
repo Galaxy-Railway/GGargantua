@@ -3,6 +3,7 @@ package module
 import (
 	"context"
 	"errors"
+	"fmt"
 	StepModule "github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/step/module"
 	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/step/service"
 	"github.com/Galaxy-Railway/GGargantua/pkg/common"
@@ -35,9 +36,17 @@ func NewJob() *Job {
 }
 
 func (j *Job) GoJob(ctx context.Context, msService service.StepServiceApp) {
+	j.Status = PROCESSING
 	go func() {
-		j.Status = PROCESSING
-		result, err := msService.ExecuteSteps(j.MainStep, ctx)
+		defer func() {
+			if err := recover(); err != nil {
+				if err != nil {
+					j.Status = FAILED
+					j.Reason = fmt.Sprintf("got panic, err: %+v", err)
+				}
+			}
+		}()
+		result, err := msService.ExecuteStep(j.MainStep, ctx)
 		if err != nil {
 			if errors.Is(err, common.CanceledError) {
 				j.Status = CANCELED

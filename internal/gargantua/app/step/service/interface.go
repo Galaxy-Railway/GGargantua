@@ -6,5 +6,5 @@ import (
 )
 
 type StepServiceApp interface {
-	ExecuteSteps(*module.Step, context.Context) (*module.StepResult, error)
+	ExecuteStep(*module.Step, context.Context) (*module.StepResult, error)
 }
