@@ -3,7 +3,7 @@ package client
 import (
 	"context"
 	"encoding/json"
-	"github.com/Galaxy-Railway/GGargantua/api/protobuf/request_pb"
+	"github.com/Galaxy-Railway/GGargantua/api/protobuf"
 	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/http"
 	"testing"
 )
@@ -17,8 +17,8 @@ func TestSendSingleHttp(t *testing.T) {
 		t.Fatalf("marshal struct into json failed, err: %v", err)
 	}
 
-	singleRequest := new(request_pb.SingleRequest)
-	singleRequest.RequestSchema = request_pb.SchemaType_HTTP
+	singleRequest := new(protobuf.SingleRequest)
+	singleRequest.RequestSchema = protobuf.SchemaType_HTTP
 	singleRequest.RequestContent = bytes
 
 	conn, err := GetConnection()
@@ -26,7 +26,7 @@ func TestSendSingleHttp(t *testing.T) {
 		t.Fatalf("get connection failed, err: %v", err)
 	}
 
-	c := request_pb.NewSingleRequestSenderClient(conn)
+	c := protobuf.NewSingleRequestSenderClient(conn)
 	r, err := c.SendSingleRequest(context.Background(), singleRequest)
 	if err != nil {
 		t.Errorf("failed to execute rpc, err: %v", err)
