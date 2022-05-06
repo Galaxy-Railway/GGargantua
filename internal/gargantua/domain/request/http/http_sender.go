@@ -3,7 +3,7 @@ package http
 import (
 	"bytes"
 	"crypto/tls"
-	"encoding/json"
+	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/module"
 	"github.com/pkg/errors"
 	"io/ioutil"
 	"net/http"
@@ -27,24 +27,27 @@ func (s *Sender) Init() {
 var WrongContentTypeError = errors.New("this is not a http request content")
 
 // SendOnce will send a message for once
-func (s *Sender) SendOnce(input interface{}) ([]byte, error) {
-	content, ok := input.(*RequestContent)
+func (h *Sender) SendOnce(input interface{}) (resp *module.AllResponse, err error) {
+	resp.HttpResponse = &module.HttpResponseContent{}
+	defer func() {
+		if err != nil {
+			resp.HttpResponse.Error = err
+		}
+	}()
+	content, ok := input.(*module.HttpRequestContent)
 	if !ok {
 		return nil, WrongContentTypeError
 	}
-	resp, err := s.sendHttpRequest(content)
+	response, err := h.sendHttpRequest(content)
 	if err != nil {
 		return nil, err
 	}
-	output, err := json.Marshal(resp)
-	if err != nil {
-		return nil, err
-	}
-	return output, nil
+	resp.HttpResponse = response
+	return
 }
 
 // sendHttpRequest is the core part to send a request with http schema
-func (s *Sender) sendHttpRequest(httpRequest *RequestContent) (*ResponseContent, error) {
+func (s *Sender) sendHttpRequest(httpRequest *module.HttpRequestContent) (*module.HttpResponseContent, error) {
 	var (
 		client        *http.Client
 		request       *http.Request
@@ -90,7 +93,7 @@ func (s *Sender) sendHttpRequest(httpRequest *RequestContent) (*ResponseContent,
 	defer resp.Body.Close()
 	defer client.CloseIdleConnections()
 
-	httpResponse := &ResponseContent{
+	httpResponse := &module.HttpResponseContent{
 		Body:         body,
 		Cookies:      resp.Cookies(),
 		Headers:      resp.Header,

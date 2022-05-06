@@ -29,4 +29,6 @@ message HttpsResponse {
   google.protobuf.Timestamp StartTime = 5;
   google.protobuf.Duration FistByteTime = 6;
   google.protobuf.Duration CompleteTime = 7;
+
+  string Error = 8;
 }

@@ -1,4 +1,4 @@
-package module
+package sender
 
 import (
 	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/http"

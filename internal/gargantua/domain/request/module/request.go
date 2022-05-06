@@ -2,8 +2,7 @@ package module
 
 import (
 	"github.com/Galaxy-Railway/GGargantua/api/protobuf"
-	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/http"
-	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/https"
+	"google.golang.org/protobuf/types/known/durationpb"
 	"time"
 )
 
@@ -12,8 +11,8 @@ type Request struct {
 	Times         int
 	Concurrency   int
 
-	HttpRequest  *http.RequestContent
-	HttpsRequest *https.RequestContent
+	HttpRequest  *HttpRequestContent
+	HttpsRequest *HttpsRequestContent
 }
 
 func TransRequestFromPb(request *protobuf.Request) *Request {
@@ -25,14 +24,14 @@ func TransRequestFromPb(request *protobuf.Request) *Request {
 		Times:         int(request.Times),
 		Concurrency:   int(request.Concurrency),
 
-		HttpRequest:  http.TransRequestContentFromPb(request.HttpRequest),
-		HttpsRequest: https.TransRequestContentFromPb(request.HttpsRequest),
+		HttpRequest:  TransHttpRequestContentFromPb(request.HttpRequest),
+		HttpsRequest: TransHttpsRequestContentFromPb(request.HttpsRequest),
 	}
 }
 
 type AllResponse struct {
-	HttpResponse  *http.ResponseContent
-	HttpsResponse *https.ResponseContent
+	HttpResponse  *HttpResponseContent
+	HttpsResponse *HttpsResponseContent
 }
 
 type Response struct {
@@ -41,28 +40,28 @@ type Response struct {
 	ResponseContent []*AllResponse
 }
 
-func TransResponseFromPb(response *protobuf.Response) *Response {
+func TransResponseToPb(response *Response) *protobuf.Response {
 	if response == nil {
 		return nil
 	}
-	return &Response{
-		ResponseSchema:  SchemaType(int(response.ResponseSchema)),
-		TotalTime:       response.TotalTime.AsDuration(),
-		ResponseContent: TransAllResponsesFromPb(response.AllResponse),
+	return &protobuf.Response{
+		ResponseSchema: protobuf.SchemaType(response.ResponseSchema),
+		TotalTime:      durationpb.New(response.TotalTime),
+		AllResponse:    TransAllResponsesToPb(response.ResponseContent),
 	}
 }
 
-func TransAllResponseFromPb(response *protobuf.SingleResponse) *AllResponse {
-	return &AllResponse{
-		HttpResponse:  http.TransResponseContentFromPb(response.HttpResponse),
-		HttpsResponse: https.TransResponseContentFromPb(response.HttpsResponse),
+func TransAllResponseToPb(response *AllResponse) *protobuf.SingleResponse {
+	return &protobuf.SingleResponse{
+		HttpResponse:  TransHttpResponseContentToPb(response.HttpResponse),
+		HttpsResponse: TransHttpsResponseContentToPb(response.HttpsResponse),
 	}
 }
 
-func TransAllResponsesFromPb(response []*protobuf.SingleResponse) []*AllResponse {
-	result := make([]*AllResponse, len(response))
+func TransAllResponsesToPb(response []*AllResponse) []*protobuf.SingleResponse {
+	result := make([]*protobuf.SingleResponse, len(response))
 	for i := range response {
-		result[i] = TransAllResponseFromPb(response[i])
+		result[i] = TransAllResponseToPb(response[i])
 	}
 	return result
 }

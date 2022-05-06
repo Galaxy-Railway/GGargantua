@@ -3,7 +3,7 @@ package https
 import (
 	"bytes"
 	"crypto/tls"
-	"encoding/json"
+	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/module"
 	"github.com/pkg/errors"
 	"io/ioutil"
 	"net/http"
@@ -16,23 +16,26 @@ type Sender struct {
 
 var WrongContentTypeError = errors.New("this is not a https request content")
 
-func (h *Sender) SendOnce(input interface{}) ([]byte, error) {
-	content, ok := input.(*RequestContent)
+func (h *Sender) SendOnce(input interface{}) (resp *module.AllResponse, err error) {
+	resp.HttpsResponse = &module.HttpsResponseContent{}
+	defer func() {
+		if err != nil {
+			resp.HttpsResponse.Error = err
+		}
+	}()
+	content, ok := input.(*module.HttpsRequestContent)
 	if !ok {
 		return nil, WrongContentTypeError
 	}
-	resp, err := sendHttpsRequest(content)
+	response, err := h.sendHttpsRequest(content)
 	if err != nil {
 		return nil, err
 	}
-	output, err := json.Marshal(resp)
-	if err != nil {
-		return nil, err
-	}
-	return output, nil
+	resp.HttpsResponse = response
+	return
 }
 
-func sendHttpsRequest(httpsRequest *RequestContent) (*ResponseContent, error) {
+func (h *Sender) sendHttpsRequest(httpsRequest *module.HttpsRequestContent) (*module.HttpsResponseContent, error) {
 	var (
 		client        *http.Client
 		request       *http.Request
@@ -82,7 +85,7 @@ func sendHttpsRequest(httpsRequest *RequestContent) (*ResponseContent, error) {
 	defer resp.Body.Close()
 	defer client.CloseIdleConnections()
 
-	httpsResponse := &ResponseContent{
+	httpsResponse := &module.HttpsResponseContent{
 		Body:         body,
 		Cookies:      resp.Cookies(),
 		Headers:      resp.Header,

@@ -4,6 +4,7 @@ go 1.15
 
 require (
 	github.com/google/uuid v1.1.2
+	github.com/panjf2000/ants/v2 v2.4.8
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/pkg/errors v0.8.1
 	github.com/robertkrimen/otto v0.0.0-20211024170158-b87d35c0b86f
