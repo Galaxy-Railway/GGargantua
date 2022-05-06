@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option go_package = "api/protobuf";
+
+import "api/proto_files/http_content.proto";
+import "api/proto_files/https_content.proto";
+import "google/protobuf/duration.proto";
+
+package GGargantua.v1.proto;
+
+enum SchemaType{
+  HTTP = 0;
+  HTTPS = 1;
+}
+
+message Request {
+  SchemaType RequestSchema = 1;
+  int64 Times = 2;
+  int32 Concurrency = 3;
+
+  proto.HttpRequest HttpRequest = 4;
+  proto.HttpsRequest HttpsRequest = 5;
+}
+
+message Response {
+  SchemaType ResponseSchema = 1;
+  google.protobuf.Duration TotalTime = 2;
+  repeated SingleResponse AllResponse = 3;
+}
+
+message SingleResponse {
+  proto.HttpResponse HttpResponse = 1;
+  proto.HttpsResponse HttpsResponse = 2;
+}

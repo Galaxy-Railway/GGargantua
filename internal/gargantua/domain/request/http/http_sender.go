@@ -24,12 +24,13 @@ func (s *Sender) Init() {
 	}}
 }
 
+var WrongContentTypeError = errors.New("this is not a http request content")
+
 // SendOnce will send a message for once
-func (s *Sender) SendOnce(input []byte) ([]byte, error) {
-	content := &RequestContent{}
-	err := json.Unmarshal(input, content)
-	if err != nil {
-		return nil, err
+func (s *Sender) SendOnce(input interface{}) ([]byte, error) {
+	content, ok := input.(*RequestContent)
+	if !ok {
+		return nil, WrongContentTypeError
 	}
 	resp, err := s.sendHttpRequest(content)
 	if err != nil {
@@ -68,8 +69,10 @@ func (s *Sender) sendHttpRequest(httpRequest *RequestContent) (*ResponseContent,
 	}
 	request = request.WithContext(httptrace.WithClientTrace(request.Context(), trace))
 
-	for k, v := range httpRequest.Headers {
-		request.Header.Set(k, v)
+	for k, vs := range httpRequest.Headers {
+		for _, v := range vs {
+			request.Header.Add(k, v)
+		}
 	}
 
 	startTime = time.Now()

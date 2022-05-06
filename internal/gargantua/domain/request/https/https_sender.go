@@ -14,11 +14,12 @@ import (
 type Sender struct {
 }
 
-func (h *Sender) SendOnce(input []byte) ([]byte, error) {
-	content := &RequestContent{}
-	err := json.Unmarshal(input, content)
-	if err != nil {
-		return nil, err
+var WrongContentTypeError = errors.New("this is not a https request content")
+
+func (h *Sender) SendOnce(input interface{}) ([]byte, error) {
+	content, ok := input.(*RequestContent)
+	if !ok {
+		return nil, WrongContentTypeError
 	}
 	resp, err := sendHttpsRequest(content)
 	if err != nil {
@@ -60,8 +61,10 @@ func sendHttpsRequest(httpsRequest *RequestContent) (*ResponseContent, error) {
 	}
 	request = request.WithContext(httptrace.WithClientTrace(request.Context(), trace))
 
-	for k, v := range httpsRequest.Headers {
-		request.Header.Set(k, v)
+	for k, vs := range httpsRequest.Headers {
+		for _, v := range vs {
+			request.Header.Set(k, v)
+		}
 	}
 
 	startTime = time.Now()
