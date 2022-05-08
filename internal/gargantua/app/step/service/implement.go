@@ -5,11 +5,9 @@ import (
 	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/step/module"
 	request "github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/service"
 	script "github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/script/service"
-	"go.uber.org/zap"
 )
 
 type StepServiceAppImpl struct {
-	logger         *zap.SugaredLogger
 	requestService request.RequestService
 	scriptService  script.ScriptService
 }
@@ -18,9 +16,8 @@ func (m *StepServiceAppImpl) ExecuteStep(step *module.Step, ctx context.Context)
 	return step.Execute(ctx, m.requestService, m.scriptService)
 }
 
-func NewStepsServiceApp(logger *zap.SugaredLogger, rs request.RequestService, ss script.ScriptService) StepServiceApp {
+func NewStepsServiceApp(rs request.RequestService, ss script.ScriptService) StepServiceApp {
 	return &StepServiceAppImpl{
-		logger:         logger,
 		requestService: rs,
 		scriptService:  ss,
 	}

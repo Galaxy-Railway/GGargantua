@@ -30,6 +30,7 @@ func NewLogger(pConfig *ProjectConfig) *zap.SugaredLogger {
 	return GlobalLogger
 }
 
+// LoggerInjectTrigger make dig framework initiate logger immediately
 func LoggerInjectTrigger(_ *zap.SugaredLogger) {
 	return
 }

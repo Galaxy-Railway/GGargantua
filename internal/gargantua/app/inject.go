@@ -1,6 +1,7 @@
 package app
 
 import (
+	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/job"
 	jobService "github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/job/service"
 	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/step"
 	stepService "github.com/Galaxy-Railway/GGargantua/internal/gargantua/app/step/service"
@@ -20,6 +21,9 @@ func InjectAppLayer(container *dig.Container) error {
 
 func InjectLoggers(container *dig.Container) error {
 	if err := container.Invoke(step.InjectLogger); err != nil {
+		return errors.Wrap(err, "failed to inject logger of step")
+	}
+	if err := container.Invoke(job.InjectLogger); err != nil {
 		return errors.Wrap(err, "failed to inject logger of step")
 	}
 	return nil

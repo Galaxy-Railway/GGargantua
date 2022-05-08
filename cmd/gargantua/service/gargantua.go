@@ -59,7 +59,6 @@ func InjectLayers(container *dig.Container) error {
 	if err := app.InjectAppLayer(container); err != nil {
 		return err
 	}
-
 	if err := ui.InvokeRegister(container); err != nil {
 		return err
 	}

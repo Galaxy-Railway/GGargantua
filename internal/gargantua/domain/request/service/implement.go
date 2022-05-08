@@ -11,11 +11,10 @@ import (
 )
 
 type RequestServiceImpl struct {
-	logger *zap.SugaredLogger
 }
 
 func NewRequestService(l *zap.SugaredLogger) RequestService {
-	return &RequestServiceImpl{logger: l.Named("domain | request")}
+	return &RequestServiceImpl{}
 }
 
 func (s *RequestServiceImpl) SendRequest(request *module.Request) (*module.Response, error) {
