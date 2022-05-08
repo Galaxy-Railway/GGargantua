@@ -34,7 +34,7 @@ func (j JobServiceUI) CancelAJob(ctx context.Context, uuid *protobuf.JobUuid) (*
 	if err != nil {
 		j.logger.Errorf("failed to cancel a job, err: %+v", err)
 	}
-	return nil, err
+	return &emptypb.Empty{}, err
 }
 
 func (j JobServiceUI) GetJobResult(ctx context.Context, uuid *protobuf.JobUuid) (*protobuf.JobResult, error) {

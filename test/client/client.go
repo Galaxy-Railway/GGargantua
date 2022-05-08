@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"context"
-	"fmt"
 	"github.com/Galaxy-Railway/GGargantua/api/protobuf"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -48,18 +47,25 @@ func main() {
 
 	// get job result
 	scanner := bufio.NewScanner(os.Stdin)
-	for {
-		result, err := client.GetJobResult(ctx, jobid, opts...)
-		if err != nil {
-			logger.Fatalf("get job result failed, %v", err)
-		}
-		fmt.Printf("result:/n%+v\n", result)
+	for scanner.Scan() {
 
-		scanner.Scan()
 		text := scanner.Text()
-		if strings.Compare("1", text) != 0 {
-			fmt.Println(text)
-			break
+		if strings.Compare("1", text) == 0 {
+			result, err := client.GetJobResult(ctx, jobid, opts...)
+			if err != nil {
+				logger.Fatalf("get job result failed, %v", err)
+			}
+			//fmt.Printf("result:/n%+v\n", result)
+			logger.Infof("successed num: %+v", result)
+		} else if strings.Compare("2", text) == 0 {
+			_, err := client.CancelAJob(ctx, jobid, opts...)
+			if err != nil {
+				logger.Fatalf("get job result failed, %v", err)
+			}
+			//fmt.Printf("result:/n%+v\n", result)
+			logger.Infof("stoped job")
+		} else {
+			logger.Errorf("wrong input: %s", text)
 		}
 	}
 }
@@ -72,11 +78,11 @@ var (
 			RequestStep: &protobuf.RequestStepType{
 				Request: &protobuf.Request{
 					RequestSchema: protobuf.SchemaType_HTTP,
-					Times:         10,
-					Concurrency:   3,
+					Times:         1000,
+					Concurrency:   1,
 					HttpRequest: &protobuf.HttpRequest{
 						Method:  "GET",
-						Url:     "www.baidu.com",
+						Url:     "https://www.baidu.com",
 						Headers: nil,
 						Params:  nil,
 						Body:    nil,

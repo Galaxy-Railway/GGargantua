@@ -58,8 +58,8 @@ func (j *Job) GoJob(ctx context.Context, msService service.StepServiceApp) {
 		} else {
 			j.Status = FINISHED
 			j.Reason = "this job was finished"
-			j.MainStep.Result = result
 		}
+		j.MainStep.Result = result
 		j.EndTime = time.Now()
 	}()
 }

@@ -25,7 +25,9 @@ message Request {
 message Response {
   SchemaType ResponseSchema = 1;
   google.protobuf.Duration TotalTime = 2;
-  repeated SingleResponse AllResponse = 3;
+  int32 TotalRequests = 3;
+  int32 SuccessRequests = 4;
+  repeated SingleResponse AllResponse = 5;
 }
 
 message SingleResponse {

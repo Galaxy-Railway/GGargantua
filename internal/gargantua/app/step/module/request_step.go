@@ -35,13 +35,14 @@ func (f *RequestStepType) Execute(ctx context.Context, requestService request.Re
 	} else {
 		stepResult.Success = true
 		stepResult.Reason = "request send successful"
-		bytes, marshalErr := json.Marshal(result)
-		if marshalErr != nil {
-			stepResult.Success = false
-			stepResult.Reason = fmt.Sprintf("send request success, got response: %+v, \nbut failed to marshal into json, err: %+v", result, marshalErr)
-		} else {
-			stepResult.Result = string(bytes)
-		}
 	}
-	return stepResult, nil
+	
+	bytes, marshalErr := json.Marshal(result)
+	if marshalErr != nil {
+		stepResult.Success = false
+		stepResult.Reason = fmt.Sprintf("got response: %+v, \nbut failed to marshal into json, err: %+v", result, marshalErr)
+	} else {
+		stepResult.Result = string(bytes)
+	}
+	return stepResult, err
 }

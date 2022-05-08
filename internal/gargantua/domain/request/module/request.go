@@ -37,6 +37,8 @@ type AllResponse struct {
 type Response struct {
 	ResponseSchema  SchemaType
 	TotalTime       time.Duration
+	TotalRequests   int
+	SuccessRequests int
 	ResponseContent []*AllResponse
 }
 
@@ -45,9 +47,11 @@ func TransResponseToPb(response *Response) *protobuf.Response {
 		return nil
 	}
 	return &protobuf.Response{
-		ResponseSchema: protobuf.SchemaType(response.ResponseSchema),
-		TotalTime:      durationpb.New(response.TotalTime),
-		AllResponse:    TransAllResponsesToPb(response.ResponseContent),
+		ResponseSchema:  protobuf.SchemaType(response.ResponseSchema),
+		TotalTime:       durationpb.New(response.TotalTime),
+		TotalRequests:   int32(response.TotalRequests),
+		SuccessRequests: int32(response.SuccessRequests),
+		AllResponse:     TransAllResponsesToPb(response.ResponseContent),
 	}
 }
 
