@@ -1,8 +1,10 @@
 package service
 
 import (
+	"context"
 	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/module"
 	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/sender"
+	"github.com/Galaxy-Railway/GGargantua/pkg/common"
 	"github.com/panjf2000/ants/v2"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
@@ -17,7 +19,7 @@ func NewRequestService(l *zap.SugaredLogger) RequestService {
 	return &RequestServiceImpl{}
 }
 
-func (s *RequestServiceImpl) SendRequest(request *module.Request) (*module.Response, error) {
+func (s *RequestServiceImpl) SendRequest(ctx context.Context, request *module.Request) (*module.Response, error) {
 	var (
 		iSender sender.ISender
 		content interface{}
@@ -44,18 +46,23 @@ func (s *RequestServiceImpl) SendRequest(request *module.Request) (*module.Respo
 	)
 	startTime := time.Now()
 	for i := 0; i < request.Times; i++ {
-		wg.Add(1)
-		//todo: deal with error, log it
-		_ = pool.Submit(func() {
-			resp, err := iSender.SendOnce(content)
-			if err != nil {
-				//todo: log
-			}
-			lock.Lock()
-			defer lock.Unlock()
-			responses = append(responses, resp)
-			wg.Done()
-		})
+		select {
+		case <-ctx.Done():
+			return nil, common.CanceledError
+		default:
+			wg.Add(1)
+			//todo: deal with error, log it
+			_ = pool.Submit(func() {
+				resp, err := iSender.SendOnce(ctx, content)
+				if err != nil {
+					//todo: log
+				}
+				lock.Lock()
+				defer lock.Unlock()
+				responses = append(responses, resp)
+				wg.Done()
+			})
+		}
 	}
 	wg.Wait()
 	totalTime := time.Since(startTime)

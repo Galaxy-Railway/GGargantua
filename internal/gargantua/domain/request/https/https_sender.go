@@ -2,6 +2,7 @@ package https
 
 import (
 	"bytes"
+	"context"
 	"crypto/tls"
 	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/module"
 	"github.com/pkg/errors"
@@ -16,7 +17,7 @@ type Sender struct {
 
 var WrongContentTypeError = errors.New("this is not a https request content")
 
-func (h *Sender) SendOnce(input interface{}) (resp *module.AllResponse, err error) {
+func (h *Sender) SendOnce(ctx context.Context, input interface{}) (resp *module.AllResponse, err error) {
 	resp.HttpsResponse = &module.HttpsResponseContent{}
 	defer func() {
 		if err != nil {

@@ -15,6 +15,9 @@ func TransUuidToString(id *protobuf.JobUuid) string {
 }
 
 func TransferStepResult(result *module.StepResult) *protobuf.StepResult {
+	if result == nil {
+		return nil
+	}
 	return &protobuf.StepResult{
 		Success:   result.Success,
 		Reason:    result.Reason,

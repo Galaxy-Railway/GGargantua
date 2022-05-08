@@ -28,7 +28,7 @@ func TransRequestStepTypeByPb(stepType *protobuf.RequestStepType) *RequestStepTy
 func (f *RequestStepType) Execute(ctx context.Context, requestService request.RequestService, scriptService script.ScriptService) (*StepResult, error) {
 	stepResult := &StepResult{}
 	// todo: send ctx
-	result, err := requestService.SendRequest(f.Request)
+	result, err := requestService.SendRequest(ctx, f.Request)
 	if err != nil {
 		stepResult.Success = false
 		stepResult.Reason = err.Error()

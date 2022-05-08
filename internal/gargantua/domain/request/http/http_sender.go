@@ -2,6 +2,7 @@ package http
 
 import (
 	"bytes"
+	"context"
 	"crypto/tls"
 	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/module"
 	"github.com/pkg/errors"
@@ -27,7 +28,7 @@ func (s *Sender) Init() {
 var WrongContentTypeError = errors.New("this is not a http request content")
 
 // SendOnce will send a message for once
-func (h *Sender) SendOnce(input interface{}) (resp *module.AllResponse, err error) {
+func (h *Sender) SendOnce(ctx context.Context, input interface{}) (resp *module.AllResponse, err error) {
 	h.Init()
 	resp = &module.AllResponse{}
 	resp.HttpResponse = &module.HttpResponseContent{}
@@ -38,18 +39,19 @@ func (h *Sender) SendOnce(input interface{}) (resp *module.AllResponse, err erro
 	}()
 	content, ok := input.(*module.HttpRequestContent)
 	if !ok {
-		return nil, WrongContentTypeError
+		err = WrongContentTypeError
+		return
 	}
-	response, err := h.sendHttpRequest(content)
+	response, err := h.sendHttpRequest(ctx, content)
 	if err != nil {
-		return nil, err
+		return
 	}
 	resp.HttpResponse = response
 	return
 }
 
 // sendHttpRequest is the core part to send a request with http schema
-func (s *Sender) sendHttpRequest(httpRequest *module.HttpRequestContent) (*module.HttpResponseContent, error) {
+func (s *Sender) sendHttpRequest(ctx context.Context, httpRequest *module.HttpRequestContent) (*module.HttpResponseContent, error) {
 	var (
 		client        *http.Client
 		request       *http.Request
@@ -72,7 +74,7 @@ func (s *Sender) sendHttpRequest(httpRequest *module.HttpRequestContent) (*modul
 			firstByteTime = time.Since(startTime)
 		},
 	}
-	request = request.WithContext(httptrace.WithClientTrace(request.Context(), trace))
+	request = request.WithContext(httptrace.WithClientTrace(ctx, trace))
 
 	for k, vs := range httpRequest.Headers {
 		for _, v := range vs {
