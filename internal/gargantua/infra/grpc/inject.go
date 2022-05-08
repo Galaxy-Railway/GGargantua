@@ -20,5 +20,5 @@ func InvokeGrpc(container *dig.Container) error {
 }
 
 func NewGrpcServer() *grpc.Server {
-	return grpc.NewServer(SetGrpcInceptor()...)
+	return grpc.NewServer(SetGrpcInterceptor()...)
 }

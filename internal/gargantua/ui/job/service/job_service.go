@@ -15,7 +15,7 @@ type JobServiceUI struct {
 }
 
 func NewJobServiceUI(jobServiceApp jobService.JobServiceApp, logger *zap.SugaredLogger) protobuf.JobServiceServer {
-	return &JobServiceUI{JobServiceApp: jobServiceApp, logger: logger.Named("JobServiceUI")}
+	return &JobServiceUI{JobServiceApp: jobServiceApp, logger: logger.Named("ui | jobService")}
 }
 
 func (j JobServiceUI) CreateAJob(_ context.Context, _ *emptypb.Empty) (*protobuf.JobUuid, error) {

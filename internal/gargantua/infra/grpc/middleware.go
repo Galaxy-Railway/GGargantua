@@ -14,15 +14,15 @@ var (
 )
 
 func InitLogger(l *zap.SugaredLogger) {
-	logger = l.Named("inceptor")
+	logger = l.Named("infra | interceptor")
 }
 
-func SetGrpcInceptor() []grpc.ServerOption {
-	inceptor := make([]grpc.UnaryServerInterceptor, 0)
-	inceptor = append(inceptor, LogInterceptor)
+func SetGrpcInterceptor() []grpc.ServerOption {
+	interceptor := make([]grpc.UnaryServerInterceptor, 0)
+	interceptor = append(interceptor, LogInterceptor)
 
 	options := make([]grpc.ServerOption, 0)
-	options = append(options, grpc.ChainUnaryInterceptor(inceptor...))
+	options = append(options, grpc.ChainUnaryInterceptor(interceptor...))
 	return options
 }
 

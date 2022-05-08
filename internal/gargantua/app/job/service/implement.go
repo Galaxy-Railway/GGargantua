@@ -11,6 +11,7 @@ import (
 )
 
 type JobServiceAppImpl struct {
+	// todo: monitor long term jobs, mention user to delete it
 	Jobs        map[string]*module.Job
 	StepService stepService.StepServiceApp
 }

@@ -5,15 +5,17 @@ import (
 	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/domain/request/sender"
 	"github.com/panjf2000/ants/v2"
 	"github.com/pkg/errors"
+	"go.uber.org/zap"
 	"sync"
 	"time"
 )
 
 type RequestServiceImpl struct {
+	logger *zap.SugaredLogger
 }
 
-func NewRequestService() RequestService {
-	return &RequestServiceImpl{}
+func NewRequestService(l *zap.SugaredLogger) RequestService {
+	return &RequestServiceImpl{logger: l.Named("domain | request")}
 }
 
 func (s *RequestServiceImpl) SendRequest(request *module.Request) (*module.Response, error) {
@@ -31,7 +33,6 @@ func (s *RequestServiceImpl) SendRequest(request *module.Request) (*module.Respo
 		content = request.HttpsRequest
 	}
 
-	// todo: make goroutine pool, do parallel request
 	pool, err := ants.NewPool(request.Concurrency)
 	if err != nil {
 		return nil, errors.Wrap(err, "get ants pool failed")
