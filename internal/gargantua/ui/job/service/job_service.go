@@ -26,7 +26,7 @@ func (j JobServiceUI) CreateAJob(_ context.Context, _ *emptypb.Empty) (*protobuf
 func (j JobServiceUI) StartAJob(_ context.Context, content *protobuf.UpdateJobContent) (*emptypb.Empty, error) {
 	uuid, step := job2.TransferUpdateJobContent(content)
 	_, err := j.JobServiceApp.StartAJob(uuid, step)
-	return nil, err
+	return &emptypb.Empty{}, err
 }
 
 func (j JobServiceUI) CancelAJob(ctx context.Context, uuid *protobuf.JobUuid) (*emptypb.Empty, error) {

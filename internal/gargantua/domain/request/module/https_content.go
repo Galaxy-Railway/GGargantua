@@ -34,6 +34,9 @@ type HttpsResponseContent struct {
 }
 
 func TransHttpsRequestContentFromPb(request *protobuf.HttpsRequest) *HttpsRequestContent {
+	if request == nil {
+		return nil
+	}
 	return &HttpsRequestContent{
 		Method:  request.Method,
 		Url:     request.Url,

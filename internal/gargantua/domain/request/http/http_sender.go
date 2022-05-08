@@ -28,6 +28,8 @@ var WrongContentTypeError = errors.New("this is not a http request content")
 
 // SendOnce will send a message for once
 func (h *Sender) SendOnce(input interface{}) (resp *module.AllResponse, err error) {
+	h.Init()
+	resp = &module.AllResponse{}
 	resp.HttpResponse = &module.HttpResponseContent{}
 	defer func() {
 		if err != nil {

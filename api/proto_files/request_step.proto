@@ -15,7 +15,7 @@ enum SchemaType{
 
 message Request {
   SchemaType RequestSchema = 1;
-  int64 Times = 2;
+  int32 Times = 2;
   int32 Concurrency = 3;
 
   proto.HttpRequest HttpRequest = 4;
