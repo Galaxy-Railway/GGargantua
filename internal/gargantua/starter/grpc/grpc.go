@@ -6,6 +6,10 @@ import (
 	"net"
 )
 
+func NewGrpcServer() *grpc.Server {
+	return grpc.NewServer(SetGrpcInterceptor()...)
+}
+
 // StartGargantuaGrpcServer will start a grpc server of gargantua
 func StartGargantuaGrpcServer(config *common.ProjectConfig, server *grpc.Server) error {
 	lis, err := net.Listen(config.Listen.Network, config.Listen.Address)
