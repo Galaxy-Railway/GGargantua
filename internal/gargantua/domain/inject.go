@@ -10,6 +10,16 @@ import (
 )
 
 func InjectDomainLayer(container *dig.Container) error {
+	if err := InjectService(container); err != nil {
+		return errors.Wrap(err, "failed to inject service in layer domain")
+	}
+	if err := InjectLoggers(container); err != nil {
+		return errors.Wrap(err, "failed to inject loggers in layer domain")
+	}
+	return nil
+}
+
+func InjectService(container *dig.Container) error {
 	if err := container.Provide(requestService.NewRequestService); err != nil {
 		return errors.Wrap(err, "failed to inject NewRequestService")
 	}
@@ -21,10 +31,10 @@ func InjectDomainLayer(container *dig.Container) error {
 
 func InjectLoggers(container *dig.Container) error {
 	if err := container.Invoke(request.InjectLogger); err != nil {
-		return errors.Wrap(err, "failed to inject logger of step")
+		return errors.Wrap(err, "failed to inject logger of request")
 	}
 	if err := container.Invoke(script.InjectLogger); err != nil {
-		return errors.Wrap(err, "failed to inject logger of step")
+		return errors.Wrap(err, "failed to inject logger of script")
 	}
 	return nil
 }

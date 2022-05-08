@@ -24,7 +24,7 @@ func InjectLoggers(container *dig.Container) error {
 		return errors.Wrap(err, "failed to inject logger of step")
 	}
 	if err := container.Invoke(job.InjectLogger); err != nil {
-		return errors.Wrap(err, "failed to inject logger of step")
+		return errors.Wrap(err, "failed to inject logger of job")
 	}
 	return nil
 }
