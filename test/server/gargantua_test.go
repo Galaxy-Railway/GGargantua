@@ -6,5 +6,5 @@ import (
 )
 
 func TestGargantua(t *testing.T) {
-	service.Gargantua("../test.yaml")
+	service.GargantuaGrpc("../test.yaml")
 }

@@ -9,6 +9,8 @@ import (
 	"text/tabwriter"
 )
 
+// usage:
+// gargantua --config /path/to/config.yaml
 func main() {
 	// Define flags.
 	fs := flag.NewFlagSet(common.ProjectName, flag.ExitOnError)
@@ -20,7 +22,9 @@ func main() {
 	if err != nil {
 		fmt.Printf("parse input params failed! error: %v", err)
 	}
-	service.Gargantua(*configFile)
+
+	// start gargantua grpc server
+	service.GargantuaGrpc(*configFile)
 }
 
 func usageFor(fs *flag.FlagSet, short string) func() {

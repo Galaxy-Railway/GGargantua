@@ -15,8 +15,8 @@ var (
 	logger *zap.SugaredLogger
 )
 
-// Gargantua is main server starter of gargantua
-func Gargantua(configFile string) {
+// GargantuaGrpc is main server starter of gargantua
+func GargantuaGrpc(configFile string) {
 	common.SetConfigPath(configFile)
 
 	// start a dig container

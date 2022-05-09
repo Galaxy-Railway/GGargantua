@@ -3,6 +3,8 @@ package main
 import (
 	"bufio"
 	"context"
+	"encoding/json"
+	"fmt"
 	"github.com/Galaxy-Railway/GGargantua/api/protobuf"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -55,8 +57,11 @@ func main() {
 			if err != nil {
 				logger.Fatalf("get job result failed, %v", err)
 			}
-			//fmt.Printf("result:/n%+v\n", result)
-			logger.Infof("successed num: %+v", result)
+			pretty, err := json.MarshalIndent(result, "", "\t")
+			if err != nil {
+				logger.Fatalf("marshal indent failed, %v", err)
+			}
+			fmt.Println(string(pretty))
 		} else if strings.Compare("2", text) == 0 {
 			_, err := client.CancelAJob(ctx, jobid, opts...)
 			if err != nil {
@@ -66,6 +71,7 @@ func main() {
 			logger.Infof("stoped job")
 		} else {
 			logger.Errorf("wrong input: %s", text)
+			break
 		}
 	}
 }
@@ -78,7 +84,7 @@ var (
 			RequestStep: &protobuf.RequestStepType{
 				Request: &protobuf.Request{
 					RequestSchema: protobuf.SchemaType_HTTP,
-					Times:         1000,
+					Times:         10,
 					Concurrency:   1,
 					HttpRequest: &protobuf.HttpRequest{
 						Method:  "GET",
