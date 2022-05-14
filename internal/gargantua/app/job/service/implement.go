@@ -76,3 +76,5 @@ func (j JobServiceAppImpl) GetJobResult(uu string) (*stepModule.StepResult, erro
 	}
 	return job.MainStep.Result, nil
 }
+
+// todo: delete job data

@@ -37,6 +37,7 @@ func (j JobServiceUI) CancelAJob(ctx context.Context, uuid *protobuf.JobUuid) (*
 	return &emptypb.Empty{}, err
 }
 
+// fixme: use JobServiceApp.GetJobResult()
 func (j JobServiceUI) GetJobResult(ctx context.Context, uuid *protobuf.JobUuid) (*protobuf.JobResult, error) {
 	job, err := j.JobServiceApp.GetAJob(job2.TransUuidToString(uuid))
 	if err != nil {
