@@ -7,10 +7,6 @@
 package protobuf
 
 import (
-	context "context"
-	grpc "google.golang.org/grpc"
-	codes "google.golang.org/grpc/codes"
-	status "google.golang.org/grpc/status"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -159,9 +155,11 @@ var file_api_proto_files_health_check_proto_rawDesc = []byte{
 	0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75,
 	0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x24, 0x2e, 0x47, 0x47, 0x61, 0x72, 0x67, 0x61,
 	0x6e, 0x74, 0x75, 0x61, 0x2e, 0x76, 0x31, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x48, 0x65,
-	0x61, 0x6c, 0x74, 0x68, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x0e, 0x5a,
-	0x0c, 0x61, 0x70, 0x69, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x62, 0x06, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x61, 0x6c, 0x74, 0x68, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x33, 0x5a,
+	0x31, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x47, 0x61, 0x6c, 0x61,
+	0x78, 0x79, 0x2d, 0x52, 0x61, 0x69, 0x6c, 0x77, 0x61, 0x79, 0x2f, 0x47, 0x47, 0x61, 0x72, 0x67,
+	0x61, 0x6e, 0x74, 0x75, 0x61, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62,
+	0x75, 0x66, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -232,84 +230,4 @@ func file_api_proto_files_health_check_proto_init() {
 	file_api_proto_files_health_check_proto_rawDesc = nil
 	file_api_proto_files_health_check_proto_goTypes = nil
 	file_api_proto_files_health_check_proto_depIdxs = nil
-}
-
-// Reference imports to suppress errors if they are not otherwise used.
-var _ context.Context
-var _ grpc.ClientConnInterface
-
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion6
-
-// HealthCheckerClient is the client API for HealthChecker service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type HealthCheckerClient interface {
-	CheckHealth(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*HealthCondition, error)
-}
-
-type healthCheckerClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewHealthCheckerClient(cc grpc.ClientConnInterface) HealthCheckerClient {
-	return &healthCheckerClient{cc}
-}
-
-func (c *healthCheckerClient) CheckHealth(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*HealthCondition, error) {
-	out := new(HealthCondition)
-	err := c.cc.Invoke(ctx, "/GGargantua.v1.proto.HealthChecker/CheckHealth", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// HealthCheckerServer is the server API for HealthChecker service.
-type HealthCheckerServer interface {
-	CheckHealth(context.Context, *emptypb.Empty) (*HealthCondition, error)
-}
-
-// UnimplementedHealthCheckerServer can be embedded to have forward compatible implementations.
-type UnimplementedHealthCheckerServer struct {
-}
-
-func (*UnimplementedHealthCheckerServer) CheckHealth(context.Context, *emptypb.Empty) (*HealthCondition, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CheckHealth not implemented")
-}
-
-func RegisterHealthCheckerServer(s *grpc.Server, srv HealthCheckerServer) {
-	s.RegisterService(&_HealthChecker_serviceDesc, srv)
-}
-
-func _HealthChecker_CheckHealth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(HealthCheckerServer).CheckHealth(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/GGargantua.v1.proto.HealthChecker/CheckHealth",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HealthCheckerServer).CheckHealth(ctx, req.(*emptypb.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-var _HealthChecker_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "GGargantua.v1.proto.HealthChecker",
-	HandlerType: (*HealthCheckerServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "CheckHealth",
-			Handler:    _HealthChecker_CheckHealth_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "api/proto_files/health_check.proto",
 }

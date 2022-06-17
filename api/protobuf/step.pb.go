@@ -7,10 +7,6 @@
 package protobuf
 
 import (
-	context "context"
-	grpc "google.golang.org/grpc"
-	codes "google.golang.org/grpc/codes"
-	status "google.golang.org/grpc/status"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -582,8 +578,10 @@ var file_api_proto_files_step_proto_rawDesc = []byte{
 	0x2e, 0x76, 0x31, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x53, 0x74, 0x65, 0x70, 0x1a, 0x1f,
 	0x2e, 0x47, 0x47, 0x61, 0x72, 0x67, 0x61, 0x6e, 0x74, 0x75, 0x61, 0x2e, 0x76, 0x31, 0x2e, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x53, 0x74, 0x65, 0x70, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x42,
-	0x0e, 0x5a, 0x0c, 0x61, 0x70, 0x69, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x33, 0x5a, 0x31, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x47, 0x61,
+	0x6c, 0x61, 0x78, 0x79, 0x2d, 0x52, 0x61, 0x69, 0x6c, 0x77, 0x61, 0x79, 0x2f, 0x47, 0x47, 0x61,
+	0x72, 0x67, 0x61, 0x6e, 0x74, 0x75, 0x61, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x62, 0x75, 0x66, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -745,84 +743,4 @@ func file_api_proto_files_step_proto_init() {
 	file_api_proto_files_step_proto_rawDesc = nil
 	file_api_proto_files_step_proto_goTypes = nil
 	file_api_proto_files_step_proto_depIdxs = nil
-}
-
-// Reference imports to suppress errors if they are not otherwise used.
-var _ context.Context
-var _ grpc.ClientConnInterface
-
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion6
-
-// StepServiceClient is the client API for StepService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type StepServiceClient interface {
-	ExecuteStep(ctx context.Context, in *Step, opts ...grpc.CallOption) (*StepResult, error)
-}
-
-type stepServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewStepServiceClient(cc grpc.ClientConnInterface) StepServiceClient {
-	return &stepServiceClient{cc}
-}
-
-func (c *stepServiceClient) ExecuteStep(ctx context.Context, in *Step, opts ...grpc.CallOption) (*StepResult, error) {
-	out := new(StepResult)
-	err := c.cc.Invoke(ctx, "/GGargantua.v1.proto.StepService/ExecuteStep", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// StepServiceServer is the server API for StepService service.
-type StepServiceServer interface {
-	ExecuteStep(context.Context, *Step) (*StepResult, error)
-}
-
-// UnimplementedStepServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedStepServiceServer struct {
-}
-
-func (*UnimplementedStepServiceServer) ExecuteStep(context.Context, *Step) (*StepResult, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ExecuteStep not implemented")
-}
-
-func RegisterStepServiceServer(s *grpc.Server, srv StepServiceServer) {
-	s.RegisterService(&_StepService_serviceDesc, srv)
-}
-
-func _StepService_ExecuteStep_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Step)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(StepServiceServer).ExecuteStep(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/GGargantua.v1.proto.StepService/ExecuteStep",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StepServiceServer).ExecuteStep(ctx, req.(*Step))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-var _StepService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "GGargantua.v1.proto.StepService",
-	HandlerType: (*StepServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "ExecuteStep",
-			Handler:    _StepService_ExecuteStep_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "api/proto_files/step.proto",
 }

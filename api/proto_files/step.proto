@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "api/protobuf";
+option go_package = "github.com/Galaxy-Railway/GGargantua/api/protobuf";
 
 import "api/proto_files/request_step.proto";
 

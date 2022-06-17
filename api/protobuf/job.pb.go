@@ -7,10 +7,6 @@
 package protobuf
 
 import (
-	context "context"
-	grpc "google.golang.org/grpc"
-	codes "google.golang.org/grpc/codes"
-	status "google.golang.org/grpc/status"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -362,9 +358,11 @@ var file_api_proto_files_job_proto_rawDesc = []byte{
 	0x12, 0x1c, 0x2e, 0x47, 0x47, 0x61, 0x72, 0x67, 0x61, 0x6e, 0x74, 0x75, 0x61, 0x2e, 0x76, 0x31,
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4a, 0x6f, 0x62, 0x55, 0x75, 0x69, 0x64, 0x1a, 0x1e,
 	0x2e, 0x47, 0x47, 0x61, 0x72, 0x67, 0x61, 0x6e, 0x74, 0x75, 0x61, 0x2e, 0x76, 0x31, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4a, 0x6f, 0x62, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x42, 0x0e,
-	0x5a, 0x0c, 0x61, 0x70, 0x69, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4a, 0x6f, 0x62, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x42, 0x33,
+	0x5a, 0x31, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x47, 0x61, 0x6c,
+	0x61, 0x78, 0x79, 0x2d, 0x52, 0x61, 0x69, 0x6c, 0x77, 0x61, 0x79, 0x2f, 0x47, 0x47, 0x61, 0x72,
+	0x67, 0x61, 0x6e, 0x74, 0x75, 0x61, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x62, 0x75, 0x66, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -487,192 +485,4 @@ func file_api_proto_files_job_proto_init() {
 	file_api_proto_files_job_proto_rawDesc = nil
 	file_api_proto_files_job_proto_goTypes = nil
 	file_api_proto_files_job_proto_depIdxs = nil
-}
-
-// Reference imports to suppress errors if they are not otherwise used.
-var _ context.Context
-var _ grpc.ClientConnInterface
-
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion6
-
-// JobServiceClient is the client API for JobService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type JobServiceClient interface {
-	CreateAJob(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*JobUuid, error)
-	StartAJob(ctx context.Context, in *UpdateJobContent, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	CancelAJob(ctx context.Context, in *JobUuid, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	GetJobResult(ctx context.Context, in *JobUuid, opts ...grpc.CallOption) (*JobResult, error)
-}
-
-type jobServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewJobServiceClient(cc grpc.ClientConnInterface) JobServiceClient {
-	return &jobServiceClient{cc}
-}
-
-func (c *jobServiceClient) CreateAJob(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*JobUuid, error) {
-	out := new(JobUuid)
-	err := c.cc.Invoke(ctx, "/GGargantua.v1.proto.JobService/CreateAJob", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *jobServiceClient) StartAJob(ctx context.Context, in *UpdateJobContent, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/GGargantua.v1.proto.JobService/StartAJob", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *jobServiceClient) CancelAJob(ctx context.Context, in *JobUuid, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/GGargantua.v1.proto.JobService/CancelAJob", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *jobServiceClient) GetJobResult(ctx context.Context, in *JobUuid, opts ...grpc.CallOption) (*JobResult, error) {
-	out := new(JobResult)
-	err := c.cc.Invoke(ctx, "/GGargantua.v1.proto.JobService/GetJobResult", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// JobServiceServer is the server API for JobService service.
-type JobServiceServer interface {
-	CreateAJob(context.Context, *emptypb.Empty) (*JobUuid, error)
-	StartAJob(context.Context, *UpdateJobContent) (*emptypb.Empty, error)
-	CancelAJob(context.Context, *JobUuid) (*emptypb.Empty, error)
-	GetJobResult(context.Context, *JobUuid) (*JobResult, error)
-}
-
-// UnimplementedJobServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedJobServiceServer struct {
-}
-
-func (*UnimplementedJobServiceServer) CreateAJob(context.Context, *emptypb.Empty) (*JobUuid, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateAJob not implemented")
-}
-func (*UnimplementedJobServiceServer) StartAJob(context.Context, *UpdateJobContent) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StartAJob not implemented")
-}
-func (*UnimplementedJobServiceServer) CancelAJob(context.Context, *JobUuid) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CancelAJob not implemented")
-}
-func (*UnimplementedJobServiceServer) GetJobResult(context.Context, *JobUuid) (*JobResult, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetJobResult not implemented")
-}
-
-func RegisterJobServiceServer(s *grpc.Server, srv JobServiceServer) {
-	s.RegisterService(&_JobService_serviceDesc, srv)
-}
-
-func _JobService_CreateAJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(JobServiceServer).CreateAJob(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/GGargantua.v1.proto.JobService/CreateAJob",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobServiceServer).CreateAJob(ctx, req.(*emptypb.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _JobService_StartAJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateJobContent)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(JobServiceServer).StartAJob(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/GGargantua.v1.proto.JobService/StartAJob",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobServiceServer).StartAJob(ctx, req.(*UpdateJobContent))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _JobService_CancelAJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(JobUuid)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(JobServiceServer).CancelAJob(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/GGargantua.v1.proto.JobService/CancelAJob",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobServiceServer).CancelAJob(ctx, req.(*JobUuid))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _JobService_GetJobResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(JobUuid)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(JobServiceServer).GetJobResult(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/GGargantua.v1.proto.JobService/GetJobResult",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(JobServiceServer).GetJobResult(ctx, req.(*JobUuid))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-var _JobService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "GGargantua.v1.proto.JobService",
-	HandlerType: (*JobServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "CreateAJob",
-			Handler:    _JobService_CreateAJob_Handler,
-		},
-		{
-			MethodName: "StartAJob",
-			Handler:    _JobService_StartAJob_Handler,
-		},
-		{
-			MethodName: "CancelAJob",
-			Handler:    _JobService_CancelAJob_Handler,
-		},
-		{
-			MethodName: "GetJobResult",
-			Handler:    _JobService_GetJobResult_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "api/proto_files/job.proto",
 }
