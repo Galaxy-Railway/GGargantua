@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.26.0
 // 	protoc        v3.19.4
-// source: api/proto_files/health_check.proto
+// source: health_check.proto
 
 package protobuf
 
@@ -51,11 +51,11 @@ func (x HealthCondition_HealthStatus) String() string {
 }
 
 func (HealthCondition_HealthStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_api_proto_files_health_check_proto_enumTypes[0].Descriptor()
+	return file_health_check_proto_enumTypes[0].Descriptor()
 }
 
 func (HealthCondition_HealthStatus) Type() protoreflect.EnumType {
-	return &file_api_proto_files_health_check_proto_enumTypes[0]
+	return &file_health_check_proto_enumTypes[0]
 }
 
 func (x HealthCondition_HealthStatus) Number() protoreflect.EnumNumber {
@@ -64,7 +64,7 @@ func (x HealthCondition_HealthStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use HealthCondition_HealthStatus.Descriptor instead.
 func (HealthCondition_HealthStatus) EnumDescriptor() ([]byte, []int) {
-	return file_api_proto_files_health_check_proto_rawDescGZIP(), []int{0, 0}
+	return file_health_check_proto_rawDescGZIP(), []int{0, 0}
 }
 
 type HealthCondition struct {
@@ -80,7 +80,7 @@ type HealthCondition struct {
 func (x *HealthCondition) Reset() {
 	*x = HealthCondition{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_proto_files_health_check_proto_msgTypes[0]
+		mi := &file_health_check_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -93,7 +93,7 @@ func (x *HealthCondition) String() string {
 func (*HealthCondition) ProtoMessage() {}
 
 func (x *HealthCondition) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_files_health_check_proto_msgTypes[0]
+	mi := &file_health_check_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -106,7 +106,7 @@ func (x *HealthCondition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HealthCondition.ProtoReflect.Descriptor instead.
 func (*HealthCondition) Descriptor() ([]byte, []int) {
-	return file_api_proto_files_health_check_proto_rawDescGZIP(), []int{0}
+	return file_health_check_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *HealthCondition) GetStatus() HealthCondition_HealthStatus {
@@ -130,11 +130,10 @@ func (x *HealthCondition) GetError() string {
 	return ""
 }
 
-var File_api_proto_files_health_check_proto protoreflect.FileDescriptor
+var File_health_check_proto protoreflect.FileDescriptor
 
-var file_api_proto_files_health_check_proto_rawDesc = []byte{
-	0x0a, 0x22, 0x61, 0x70, 0x69, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x5f, 0x66, 0x69, 0x6c, 0x65,
-	0x73, 0x2f, 0x68, 0x65, 0x61, 0x6c, 0x74, 0x68, 0x5f, 0x63, 0x68, 0x65, 0x63, 0x6b, 0x2e, 0x70,
+var file_health_check_proto_rawDesc = []byte{
+	0x0a, 0x12, 0x68, 0x65, 0x61, 0x6c, 0x74, 0x68, 0x5f, 0x63, 0x68, 0x65, 0x63, 0x6b, 0x2e, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x12, 0x13, 0x47, 0x47, 0x61, 0x72, 0x67, 0x61, 0x6e, 0x74, 0x75, 0x61,
 	0x2e, 0x76, 0x31, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1b, 0x67, 0x6f, 0x6f, 0x67, 0x6c,
 	0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x65, 0x6d, 0x70, 0x74, 0x79,
@@ -163,25 +162,25 @@ var file_api_proto_files_health_check_proto_rawDesc = []byte{
 }
 
 var (
-	file_api_proto_files_health_check_proto_rawDescOnce sync.Once
-	file_api_proto_files_health_check_proto_rawDescData = file_api_proto_files_health_check_proto_rawDesc
+	file_health_check_proto_rawDescOnce sync.Once
+	file_health_check_proto_rawDescData = file_health_check_proto_rawDesc
 )
 
-func file_api_proto_files_health_check_proto_rawDescGZIP() []byte {
-	file_api_proto_files_health_check_proto_rawDescOnce.Do(func() {
-		file_api_proto_files_health_check_proto_rawDescData = protoimpl.X.CompressGZIP(file_api_proto_files_health_check_proto_rawDescData)
+func file_health_check_proto_rawDescGZIP() []byte {
+	file_health_check_proto_rawDescOnce.Do(func() {
+		file_health_check_proto_rawDescData = protoimpl.X.CompressGZIP(file_health_check_proto_rawDescData)
 	})
-	return file_api_proto_files_health_check_proto_rawDescData
+	return file_health_check_proto_rawDescData
 }
 
-var file_api_proto_files_health_check_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_api_proto_files_health_check_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_api_proto_files_health_check_proto_goTypes = []interface{}{
+var file_health_check_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_health_check_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_health_check_proto_goTypes = []interface{}{
 	(HealthCondition_HealthStatus)(0), // 0: GGargantua.v1.proto.HealthCondition.HealthStatus
 	(*HealthCondition)(nil),           // 1: GGargantua.v1.proto.HealthCondition
 	(*emptypb.Empty)(nil),             // 2: google.protobuf.Empty
 }
-var file_api_proto_files_health_check_proto_depIdxs = []int32{
+var file_health_check_proto_depIdxs = []int32{
 	0, // 0: GGargantua.v1.proto.HealthCondition.status:type_name -> GGargantua.v1.proto.HealthCondition.HealthStatus
 	2, // 1: GGargantua.v1.proto.HealthChecker.CheckHealth:input_type -> google.protobuf.Empty
 	1, // 2: GGargantua.v1.proto.HealthChecker.CheckHealth:output_type -> GGargantua.v1.proto.HealthCondition
@@ -192,13 +191,13 @@ var file_api_proto_files_health_check_proto_depIdxs = []int32{
 	0, // [0:1] is the sub-list for field type_name
 }
 
-func init() { file_api_proto_files_health_check_proto_init() }
-func file_api_proto_files_health_check_proto_init() {
-	if File_api_proto_files_health_check_proto != nil {
+func init() { file_health_check_proto_init() }
+func file_health_check_proto_init() {
+	if File_health_check_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_api_proto_files_health_check_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_health_check_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*HealthCondition); i {
 			case 0:
 				return &v.state
@@ -215,19 +214,19 @@ func file_api_proto_files_health_check_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_api_proto_files_health_check_proto_rawDesc,
+			RawDescriptor: file_health_check_proto_rawDesc,
 			NumEnums:      1,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_api_proto_files_health_check_proto_goTypes,
-		DependencyIndexes: file_api_proto_files_health_check_proto_depIdxs,
-		EnumInfos:         file_api_proto_files_health_check_proto_enumTypes,
-		MessageInfos:      file_api_proto_files_health_check_proto_msgTypes,
+		GoTypes:           file_health_check_proto_goTypes,
+		DependencyIndexes: file_health_check_proto_depIdxs,
+		EnumInfos:         file_health_check_proto_enumTypes,
+		MessageInfos:      file_health_check_proto_msgTypes,
 	}.Build()
-	File_api_proto_files_health_check_proto = out.File
-	file_api_proto_files_health_check_proto_rawDesc = nil
-	file_api_proto_files_health_check_proto_goTypes = nil
-	file_api_proto_files_health_check_proto_depIdxs = nil
+	File_health_check_proto = out.File
+	file_health_check_proto_rawDesc = nil
+	file_health_check_proto_goTypes = nil
+	file_health_check_proto_depIdxs = nil
 }

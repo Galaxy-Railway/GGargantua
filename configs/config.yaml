@@ -3,6 +3,8 @@ log:
   output_path:
     - "./log/gargantua.log"
     - "stdout"
-listen:
-  address: ":8090"
+grpc:
+  port: 8090
   network: "tcp"
+rest:
+  port: 8091

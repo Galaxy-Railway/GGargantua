@@ -7,8 +7,9 @@ import (
 )
 
 type ProjectConfig struct {
-	Log    LogConfig    `yaml:"log"`
-	Listen ListenConfig `yaml:"listen"`
+	Log  LogConfig  `yaml:"log"`
+	Grpc GrpcConfig `yaml:"grpc"`
+	Rest RestConfig `yaml:"rest"`
 }
 
 type LogConfig struct {
@@ -16,9 +17,15 @@ type LogConfig struct {
 	OutputPath []string `yaml:"output_path"`
 }
 
-type ListenConfig struct {
+type GrpcConfig struct {
 	Network string `yaml:"network"`
-	Address string `yaml:"address"`
+	Host    string `yaml:"host"`
+	Port    int    `yaml:"port"`
+}
+
+type RestConfig struct {
+	Host string `yaml:"host"`
+	Port int    `yaml:"port"`
 }
 
 type EnvType string

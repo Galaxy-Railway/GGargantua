@@ -1,7 +1,8 @@
 syntax = "proto3";
 
 import "google/protobuf/empty.proto";
-import "api/proto_files/step.proto";
+import "step.proto";
+import "google/api/annotations.proto";
 
 option go_package = "github.com/Galaxy-Railway/GGargantua/api/protobuf";
 
@@ -38,8 +39,24 @@ message JobResult {
 }
 
 service JobService{
-  rpc CreateAJob(google.protobuf.Empty) returns (JobUuid);
-  rpc StartAJob(UpdateJobContent) returns (google.protobuf.Empty);
-  rpc CancelAJob(JobUuid) returns (google.protobuf.Empty);
-  rpc GetJobResult(JobUuid) returns (JobResult);
+  rpc CreateAJob(google.protobuf.Empty) returns (JobUuid){
+    option (google.api.http) = {
+      post: "/v1/jobs"
+    };
+  };
+  rpc StartAJob(UpdateJobContent) returns (google.protobuf.Empty){
+    option (google.api.http) = {
+      post: "/v1/jobs/{Uuid.Uuid}/start"
+    };
+  };
+  rpc CancelAJob(JobUuid) returns (google.protobuf.Empty){
+    option (google.api.http) = {
+      post: "/v1/jobs/{Uuid}/cancel"
+    };
+  };
+  rpc GetJobResult(JobUuid) returns (JobResult){
+    option (google.api.http) = {
+      get: "/v1/jobs/{Uuid}/result"
+    };
+  };
 }

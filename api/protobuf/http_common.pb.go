@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.26.0
 // 	protoc        v3.19.4
-// source: api/proto_files/http_common.proto
+// source: http_common.proto
 
 package protobuf
 
@@ -43,7 +43,7 @@ type Cookie struct {
 func (x *Cookie) Reset() {
 	*x = Cookie{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_proto_files_http_common_proto_msgTypes[0]
+		mi := &file_http_common_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -56,7 +56,7 @@ func (x *Cookie) String() string {
 func (*Cookie) ProtoMessage() {}
 
 func (x *Cookie) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_files_http_common_proto_msgTypes[0]
+	mi := &file_http_common_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -69,7 +69,7 @@ func (x *Cookie) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Cookie.ProtoReflect.Descriptor instead.
 func (*Cookie) Descriptor() ([]byte, []int) {
-	return file_api_proto_files_http_common_proto_rawDescGZIP(), []int{0}
+	return file_http_common_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Cookie) GetName() string {
@@ -156,11 +156,10 @@ func (x *Cookie) GetUnparsed() []string {
 	return nil
 }
 
-var File_api_proto_files_http_common_proto protoreflect.FileDescriptor
+var File_http_common_proto protoreflect.FileDescriptor
 
-var file_api_proto_files_http_common_proto_rawDesc = []byte{
-	0x0a, 0x21, 0x61, 0x70, 0x69, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x5f, 0x66, 0x69, 0x6c, 0x65,
-	0x73, 0x2f, 0x68, 0x74, 0x74, 0x70, 0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x70, 0x72,
+var file_http_common_proto_rawDesc = []byte{
+	0x0a, 0x11, 0x68, 0x74, 0x74, 0x70, 0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x12, 0x13, 0x47, 0x47, 0x61, 0x72, 0x67, 0x61, 0x6e, 0x74, 0x75, 0x61, 0x2e,
 	0x76, 0x31, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
 	0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74,
@@ -193,23 +192,23 @@ var file_api_proto_files_http_common_proto_rawDesc = []byte{
 }
 
 var (
-	file_api_proto_files_http_common_proto_rawDescOnce sync.Once
-	file_api_proto_files_http_common_proto_rawDescData = file_api_proto_files_http_common_proto_rawDesc
+	file_http_common_proto_rawDescOnce sync.Once
+	file_http_common_proto_rawDescData = file_http_common_proto_rawDesc
 )
 
-func file_api_proto_files_http_common_proto_rawDescGZIP() []byte {
-	file_api_proto_files_http_common_proto_rawDescOnce.Do(func() {
-		file_api_proto_files_http_common_proto_rawDescData = protoimpl.X.CompressGZIP(file_api_proto_files_http_common_proto_rawDescData)
+func file_http_common_proto_rawDescGZIP() []byte {
+	file_http_common_proto_rawDescOnce.Do(func() {
+		file_http_common_proto_rawDescData = protoimpl.X.CompressGZIP(file_http_common_proto_rawDescData)
 	})
-	return file_api_proto_files_http_common_proto_rawDescData
+	return file_http_common_proto_rawDescData
 }
 
-var file_api_proto_files_http_common_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_api_proto_files_http_common_proto_goTypes = []interface{}{
+var file_http_common_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_http_common_proto_goTypes = []interface{}{
 	(*Cookie)(nil),                // 0: GGargantua.v1.proto.Cookie
 	(*timestamppb.Timestamp)(nil), // 1: google.protobuf.Timestamp
 }
-var file_api_proto_files_http_common_proto_depIdxs = []int32{
+var file_http_common_proto_depIdxs = []int32{
 	1, // 0: GGargantua.v1.proto.Cookie.Expires:type_name -> google.protobuf.Timestamp
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
@@ -218,13 +217,13 @@ var file_api_proto_files_http_common_proto_depIdxs = []int32{
 	0, // [0:1] is the sub-list for field type_name
 }
 
-func init() { file_api_proto_files_http_common_proto_init() }
-func file_api_proto_files_http_common_proto_init() {
-	if File_api_proto_files_http_common_proto != nil {
+func init() { file_http_common_proto_init() }
+func file_http_common_proto_init() {
+	if File_http_common_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_api_proto_files_http_common_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_http_common_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Cookie); i {
 			case 0:
 				return &v.state
@@ -241,18 +240,18 @@ func file_api_proto_files_http_common_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_api_proto_files_http_common_proto_rawDesc,
+			RawDescriptor: file_http_common_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_api_proto_files_http_common_proto_goTypes,
-		DependencyIndexes: file_api_proto_files_http_common_proto_depIdxs,
-		MessageInfos:      file_api_proto_files_http_common_proto_msgTypes,
+		GoTypes:           file_http_common_proto_goTypes,
+		DependencyIndexes: file_http_common_proto_depIdxs,
+		MessageInfos:      file_http_common_proto_msgTypes,
 	}.Build()
-	File_api_proto_files_http_common_proto = out.File
-	file_api_proto_files_http_common_proto_rawDesc = nil
-	file_api_proto_files_http_common_proto_goTypes = nil
-	file_api_proto_files_http_common_proto_depIdxs = nil
+	File_http_common_proto = out.File
+	file_http_common_proto_rawDesc = nil
+	file_http_common_proto_goTypes = nil
+	file_http_common_proto_depIdxs = nil
 }

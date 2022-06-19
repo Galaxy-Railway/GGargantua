@@ -2,7 +2,7 @@ syntax = "proto3";
 
 option go_package = "github.com/Galaxy-Railway/GGargantua/api/protobuf";
 
-import "api/proto_files/request_step.proto";
+import "request_step.proto";
 
 package GGargantua.v1.proto;
 

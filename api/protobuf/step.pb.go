@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.26.0
 // 	protoc        v3.19.4
-// source: api/proto_files/step.proto
+// source: step.proto
 
 package protobuf
 
@@ -62,11 +62,11 @@ func (x StepType) String() string {
 }
 
 func (StepType) Descriptor() protoreflect.EnumDescriptor {
-	return file_api_proto_files_step_proto_enumTypes[0].Descriptor()
+	return file_step_proto_enumTypes[0].Descriptor()
 }
 
 func (StepType) Type() protoreflect.EnumType {
-	return &file_api_proto_files_step_proto_enumTypes[0]
+	return &file_step_proto_enumTypes[0]
 }
 
 func (x StepType) Number() protoreflect.EnumNumber {
@@ -75,7 +75,7 @@ func (x StepType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use StepType.Descriptor instead.
 func (StepType) EnumDescriptor() ([]byte, []int) {
-	return file_api_proto_files_step_proto_rawDescGZIP(), []int{0}
+	return file_step_proto_rawDescGZIP(), []int{0}
 }
 
 type Step struct {
@@ -94,7 +94,7 @@ type Step struct {
 func (x *Step) Reset() {
 	*x = Step{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_proto_files_step_proto_msgTypes[0]
+		mi := &file_step_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -107,7 +107,7 @@ func (x *Step) String() string {
 func (*Step) ProtoMessage() {}
 
 func (x *Step) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_files_step_proto_msgTypes[0]
+	mi := &file_step_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -120,7 +120,7 @@ func (x *Step) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Step.ProtoReflect.Descriptor instead.
 func (*Step) Descriptor() ([]byte, []int) {
-	return file_api_proto_files_step_proto_rawDescGZIP(), []int{0}
+	return file_step_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Step) GetType() StepType {
@@ -179,7 +179,7 @@ type StepResult struct {
 func (x *StepResult) Reset() {
 	*x = StepResult{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_proto_files_step_proto_msgTypes[1]
+		mi := &file_step_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -192,7 +192,7 @@ func (x *StepResult) String() string {
 func (*StepResult) ProtoMessage() {}
 
 func (x *StepResult) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_files_step_proto_msgTypes[1]
+	mi := &file_step_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -205,7 +205,7 @@ func (x *StepResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StepResult.ProtoReflect.Descriptor instead.
 func (*StepResult) Descriptor() ([]byte, []int) {
-	return file_api_proto_files_step_proto_rawDescGZIP(), []int{1}
+	return file_step_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *StepResult) GetSuccess() bool {
@@ -249,7 +249,7 @@ type IfStepType struct {
 func (x *IfStepType) Reset() {
 	*x = IfStepType{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_proto_files_step_proto_msgTypes[2]
+		mi := &file_step_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -262,7 +262,7 @@ func (x *IfStepType) String() string {
 func (*IfStepType) ProtoMessage() {}
 
 func (x *IfStepType) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_files_step_proto_msgTypes[2]
+	mi := &file_step_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -275,7 +275,7 @@ func (x *IfStepType) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IfStepType.ProtoReflect.Descriptor instead.
 func (*IfStepType) Descriptor() ([]byte, []int) {
-	return file_api_proto_files_step_proto_rawDescGZIP(), []int{2}
+	return file_step_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *IfStepType) GetScriptStep() *ScriptStepType {
@@ -311,7 +311,7 @@ type ForStepType struct {
 func (x *ForStepType) Reset() {
 	*x = ForStepType{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_proto_files_step_proto_msgTypes[3]
+		mi := &file_step_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -324,7 +324,7 @@ func (x *ForStepType) String() string {
 func (*ForStepType) ProtoMessage() {}
 
 func (x *ForStepType) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_files_step_proto_msgTypes[3]
+	mi := &file_step_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -337,7 +337,7 @@ func (x *ForStepType) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ForStepType.ProtoReflect.Descriptor instead.
 func (*ForStepType) Descriptor() ([]byte, []int) {
-	return file_api_proto_files_step_proto_rawDescGZIP(), []int{3}
+	return file_step_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ForStepType) GetTimes() int32 {
@@ -365,7 +365,7 @@ type SequenceStepType struct {
 func (x *SequenceStepType) Reset() {
 	*x = SequenceStepType{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_proto_files_step_proto_msgTypes[4]
+		mi := &file_step_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -378,7 +378,7 @@ func (x *SequenceStepType) String() string {
 func (*SequenceStepType) ProtoMessage() {}
 
 func (x *SequenceStepType) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_files_step_proto_msgTypes[4]
+	mi := &file_step_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -391,7 +391,7 @@ func (x *SequenceStepType) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SequenceStepType.ProtoReflect.Descriptor instead.
 func (*SequenceStepType) Descriptor() ([]byte, []int) {
-	return file_api_proto_files_step_proto_rawDescGZIP(), []int{4}
+	return file_step_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *SequenceStepType) GetSubSteps() []*Step {
@@ -412,7 +412,7 @@ type ScriptStepType struct {
 func (x *ScriptStepType) Reset() {
 	*x = ScriptStepType{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_proto_files_step_proto_msgTypes[5]
+		mi := &file_step_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -425,7 +425,7 @@ func (x *ScriptStepType) String() string {
 func (*ScriptStepType) ProtoMessage() {}
 
 func (x *ScriptStepType) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_files_step_proto_msgTypes[5]
+	mi := &file_step_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -438,7 +438,7 @@ func (x *ScriptStepType) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScriptStepType.ProtoReflect.Descriptor instead.
 func (*ScriptStepType) Descriptor() ([]byte, []int) {
-	return file_api_proto_files_step_proto_rawDescGZIP(), []int{5}
+	return file_step_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ScriptStepType) GetScript() string {
@@ -459,7 +459,7 @@ type RequestStepType struct {
 func (x *RequestStepType) Reset() {
 	*x = RequestStepType{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_proto_files_step_proto_msgTypes[6]
+		mi := &file_step_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -472,7 +472,7 @@ func (x *RequestStepType) String() string {
 func (*RequestStepType) ProtoMessage() {}
 
 func (x *RequestStepType) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_files_step_proto_msgTypes[6]
+	mi := &file_step_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -485,7 +485,7 @@ func (x *RequestStepType) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RequestStepType.ProtoReflect.Descriptor instead.
 func (*RequestStepType) Descriptor() ([]byte, []int) {
-	return file_api_proto_files_step_proto_rawDescGZIP(), []int{6}
+	return file_step_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *RequestStepType) GetRequest() *Request {
@@ -495,14 +495,12 @@ func (x *RequestStepType) GetRequest() *Request {
 	return nil
 }
 
-var File_api_proto_files_step_proto protoreflect.FileDescriptor
+var File_step_proto protoreflect.FileDescriptor
 
-var file_api_proto_files_step_proto_rawDesc = []byte{
-	0x0a, 0x1a, 0x61, 0x70, 0x69, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x5f, 0x66, 0x69, 0x6c, 0x65,
-	0x73, 0x2f, 0x73, 0x74, 0x65, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x13, 0x47, 0x47,
+var file_step_proto_rawDesc = []byte{
+	0x0a, 0x0a, 0x73, 0x74, 0x65, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x13, 0x47, 0x47,
 	0x61, 0x72, 0x67, 0x61, 0x6e, 0x74, 0x75, 0x61, 0x2e, 0x76, 0x31, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x1a, 0x22, 0x61, 0x70, 0x69, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x5f, 0x66, 0x69, 0x6c,
-	0x65, 0x73, 0x2f, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x5f, 0x73, 0x74, 0x65, 0x70, 0x2e,
+	0x6f, 0x1a, 0x12, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x5f, 0x73, 0x74, 0x65, 0x70, 0x2e,
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x86, 0x03, 0x0a, 0x04, 0x53, 0x74, 0x65, 0x70, 0x12, 0x31,
 	0x0a, 0x04, 0x54, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x1d, 0x2e, 0x47,
 	0x47, 0x61, 0x72, 0x67, 0x61, 0x6e, 0x74, 0x75, 0x61, 0x2e, 0x76, 0x31, 0x2e, 0x70, 0x72, 0x6f,
@@ -585,20 +583,20 @@ var file_api_proto_files_step_proto_rawDesc = []byte{
 }
 
 var (
-	file_api_proto_files_step_proto_rawDescOnce sync.Once
-	file_api_proto_files_step_proto_rawDescData = file_api_proto_files_step_proto_rawDesc
+	file_step_proto_rawDescOnce sync.Once
+	file_step_proto_rawDescData = file_step_proto_rawDesc
 )
 
-func file_api_proto_files_step_proto_rawDescGZIP() []byte {
-	file_api_proto_files_step_proto_rawDescOnce.Do(func() {
-		file_api_proto_files_step_proto_rawDescData = protoimpl.X.CompressGZIP(file_api_proto_files_step_proto_rawDescData)
+func file_step_proto_rawDescGZIP() []byte {
+	file_step_proto_rawDescOnce.Do(func() {
+		file_step_proto_rawDescData = protoimpl.X.CompressGZIP(file_step_proto_rawDescData)
 	})
-	return file_api_proto_files_step_proto_rawDescData
+	return file_step_proto_rawDescData
 }
 
-var file_api_proto_files_step_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_api_proto_files_step_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
-var file_api_proto_files_step_proto_goTypes = []interface{}{
+var file_step_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_step_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_step_proto_goTypes = []interface{}{
 	(StepType)(0),            // 0: GGargantua.v1.proto.StepType
 	(*Step)(nil),             // 1: GGargantua.v1.proto.Step
 	(*StepResult)(nil),       // 2: GGargantua.v1.proto.StepResult
@@ -609,7 +607,7 @@ var file_api_proto_files_step_proto_goTypes = []interface{}{
 	(*RequestStepType)(nil),  // 7: GGargantua.v1.proto.RequestStepType
 	(*Request)(nil),          // 8: GGargantua.v1.proto.Request
 }
-var file_api_proto_files_step_proto_depIdxs = []int32{
+var file_step_proto_depIdxs = []int32{
 	0,  // 0: GGargantua.v1.proto.Step.Type:type_name -> GGargantua.v1.proto.StepType
 	7,  // 1: GGargantua.v1.proto.Step.RequestStep:type_name -> GGargantua.v1.proto.RequestStepType
 	6,  // 2: GGargantua.v1.proto.Step.ScriptStep:type_name -> GGargantua.v1.proto.ScriptStepType
@@ -632,14 +630,14 @@ var file_api_proto_files_step_proto_depIdxs = []int32{
 	0,  // [0:13] is the sub-list for field type_name
 }
 
-func init() { file_api_proto_files_step_proto_init() }
-func file_api_proto_files_step_proto_init() {
-	if File_api_proto_files_step_proto != nil {
+func init() { file_step_proto_init() }
+func file_step_proto_init() {
+	if File_step_proto != nil {
 		return
 	}
-	file_api_proto_files_request_step_proto_init()
+	file_request_step_proto_init()
 	if !protoimpl.UnsafeEnabled {
-		file_api_proto_files_step_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_step_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Step); i {
 			case 0:
 				return &v.state
@@ -651,7 +649,7 @@ func file_api_proto_files_step_proto_init() {
 				return nil
 			}
 		}
-		file_api_proto_files_step_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_step_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*StepResult); i {
 			case 0:
 				return &v.state
@@ -663,7 +661,7 @@ func file_api_proto_files_step_proto_init() {
 				return nil
 			}
 		}
-		file_api_proto_files_step_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+		file_step_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*IfStepType); i {
 			case 0:
 				return &v.state
@@ -675,7 +673,7 @@ func file_api_proto_files_step_proto_init() {
 				return nil
 			}
 		}
-		file_api_proto_files_step_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_step_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ForStepType); i {
 			case 0:
 				return &v.state
@@ -687,7 +685,7 @@ func file_api_proto_files_step_proto_init() {
 				return nil
 			}
 		}
-		file_api_proto_files_step_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+		file_step_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SequenceStepType); i {
 			case 0:
 				return &v.state
@@ -699,7 +697,7 @@ func file_api_proto_files_step_proto_init() {
 				return nil
 			}
 		}
-		file_api_proto_files_step_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+		file_step_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ScriptStepType); i {
 			case 0:
 				return &v.state
@@ -711,7 +709,7 @@ func file_api_proto_files_step_proto_init() {
 				return nil
 			}
 		}
-		file_api_proto_files_step_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+		file_step_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*RequestStepType); i {
 			case 0:
 				return &v.state
@@ -728,19 +726,19 @@ func file_api_proto_files_step_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_api_proto_files_step_proto_rawDesc,
+			RawDescriptor: file_step_proto_rawDesc,
 			NumEnums:      1,
 			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_api_proto_files_step_proto_goTypes,
-		DependencyIndexes: file_api_proto_files_step_proto_depIdxs,
-		EnumInfos:         file_api_proto_files_step_proto_enumTypes,
-		MessageInfos:      file_api_proto_files_step_proto_msgTypes,
+		GoTypes:           file_step_proto_goTypes,
+		DependencyIndexes: file_step_proto_depIdxs,
+		EnumInfos:         file_step_proto_enumTypes,
+		MessageInfos:      file_step_proto_msgTypes,
 	}.Build()
-	File_api_proto_files_step_proto = out.File
-	file_api_proto_files_step_proto_rawDesc = nil
-	file_api_proto_files_step_proto_goTypes = nil
-	file_api_proto_files_step_proto_depIdxs = nil
+	File_step_proto = out.File
+	file_step_proto_rawDesc = nil
+	file_step_proto_goTypes = nil
+	file_step_proto_depIdxs = nil
 }

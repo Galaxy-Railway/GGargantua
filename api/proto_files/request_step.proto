@@ -2,8 +2,8 @@ syntax = "proto3";
 
 option go_package = "github.com/Galaxy-Railway/GGargantua/api/protobuf";
 
-import "api/proto_files/http_content.proto";
-import "api/proto_files/https_content.proto";
+import "http_content.proto";
+import "https_content.proto";
 import "google/protobuf/duration.proto";
 
 package GGargantua.v1.proto;

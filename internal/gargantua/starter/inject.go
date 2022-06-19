@@ -2,12 +2,18 @@ package starter
 
 import (
 	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/starter/grpc"
+	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/starter/rest"
+	"github.com/Galaxy-Railway/GGargantua/internal/gargantua/starter/starter_context"
 	"github.com/pkg/errors"
 	"go.uber.org/dig"
 )
 
 func InvokeGrpc(container *dig.Container) error {
 	return container.Invoke(grpc.StartGargantuaGrpcServer)
+}
+
+func InvokeRest(container *dig.Container) error {
+	return container.Invoke(rest.StartGargantuaRestServer)
 }
 
 func InjectInfraLayer(container *dig.Container) error {
@@ -30,6 +36,13 @@ func InjectGrpcServer(container *dig.Container) error {
 func InjectLoggers(container *dig.Container) error {
 	if err := container.Invoke(grpc.InitLogger); err != nil {
 		return errors.Wrap(err, "failed to inject logger of grpc")
+	}
+	return nil
+}
+
+func InjectContext(container *dig.Container) error {
+	if err := container.Provide(starter_context.NewServerContext); err != nil {
+		return errors.Wrap(err, "failed to provide context of starters")
 	}
 	return nil
 }

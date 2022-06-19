@@ -6,8 +6,8 @@ package GGargantua.v1.proto;
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
-import "api/proto_files/http_common.proto";
-import "api/proto_files/common.proto";
+import "http_common.proto";
+import "common.proto";
 
 message HttpsRequest {
   string Method = 1;
